@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { SortOption } from "./ActivityHistoryTab";
+import { DateRange } from "react-day-picker";
 
 interface ImageFiltersProps {
     searchTerm: string;
@@ -40,9 +41,12 @@ const ImageFilters: React.FC<ImageFiltersProps> = ({
         onSearch(localSearchTerm);
     };
 
-    const handleDateSelect = (range: { from: Date | undefined; to: Date | undefined } | undefined) => {
+    const handleDateSelect = (range: DateRange | undefined) => {
         if (range) {
-            onDateRangeChange(range);
+            onDateRangeChange({
+                from: range.from,
+                to: range.to
+            });
         }
         setIsDatePickerOpen(false);
     };

@@ -126,7 +126,7 @@ const ProductsAndSub = () => {
                             <Link href={product.paymentLink} passHref>
                                 <Button
                                     size="sm"
-                                    variant="primary"
+                                    variant="default"
                                     className="rounded-full shadow-xl"
                                 >
                                     Preorder Now

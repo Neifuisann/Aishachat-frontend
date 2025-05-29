@@ -19,7 +19,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
         key={item.href}
         href={item.href}
         className={cn(
-            buttonVariants({ variant: "primary" }),
+            buttonVariants({ variant: "default" }),
             pathname === item.href ? "bg-muted shadow-xl" : "",
             "w-fit justify-start rounded-full text-sm sm:text-xl text-normal text-white bg-yellow-500 hover:bg-yellow-400"
         )}

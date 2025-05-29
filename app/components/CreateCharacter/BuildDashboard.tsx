@@ -282,7 +282,7 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
                 rows={2}
                 value={formData.description}
                 onChange={(e) => handleInputChange('description', e.target.value)}
-                onBlur={() => handleBlur('des cription')}              />
+                onBlur={() => handleBlur('description')}              />
               <p className="text-sm flex justify-between">
     <span className={formErrors.description ? "text-red-500" : "text-gray-500"}>
       {formErrors.description || "Mô tả ngắn gọn về mục đích và tính cách của nhân vật."}

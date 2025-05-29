@@ -47,7 +47,7 @@ const ModifyCharacterSheet: React.FC<ModifyCharacterSheetProps> = ({
                             ? "bg-green-500 hover:bg-green-600"
                             : ""
                     }`}
-                    variant={disableButtons ? "upsell_primary" : "default"}
+                    variant={disableButtons ? "secondary" : "default"}
                     disabled={isCurrentPersonality || disableButtons}
                     onClick={() => {
                         setIsSent(true);

@@ -64,13 +64,13 @@ export default function ProductsSection() {
                 <div className="grid grid-cols-1 gap-8">
                     {products.map((product) => (
                         <Link href={product.url} key={product.id}>
-                        <Card 
+                        <Card
                             key={product.id}
-                            className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 
+                            className="bg-white rounded-xl p-6 shadow-lg border border-gray-100
                                      transform transition-all duration-300
                                      hover:shadow-xl hover:border-purple-200
                                      relative
-                                     before:absolute before:inset-0  before:opacity-0 
+                                     before:absolute before:inset-0  before:opacity-0
                                      hover:before:opacity-100 before:transition-opacity
                                      hover:translate-y-[-2px] cursor-pointer"
                         >
@@ -87,9 +87,9 @@ export default function ProductsSection() {
         priority
     />
 </div>
-						<div className="w-full md:w-3/5 flex flex-col gap-4 justify-between min-h-[200px]">	
-						
-							
+						<div className="w-full md:w-3/5 flex flex-col gap-4 justify-between min-h-[200px]">
+
+
                                     {/* Content Section */}
                                     <div className="flex-1 flex flex-col items-start md:text-left">
                                         <h3 className="text-xl font-bold text-purple-900 mb-2">
@@ -105,6 +105,7 @@ export default function ProductsSection() {
 										</div> */}
                                     </div>
                                 </div>
+                            </div>
                             </CardContent>
                         </Card>
                         </Link>

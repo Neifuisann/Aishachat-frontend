@@ -293,7 +293,17 @@ export default function NotesTab({ currentUser }: NotesTabProps) {
             <NoteModal
                 isOpen={isCreateModalOpen}
                 onClose={() => setIsCreateModalOpen(false)}
-                onSave={handleCreateNote}
+                onSave={(data: CreateNoteData | UpdateNoteData) => {
+                    // For create mode, we know the data will have all required fields
+                    const createData: CreateNoteData = {
+                        title: data.title || "",
+                        body: data.body || "",
+                        image_id: data.image_id,
+                        color: data.color,
+                        is_pinned: data.is_pinned
+                    };
+                    handleCreateNote(createData);
+                }}
                 mode="create"
                 currentUser={currentUser}
             />

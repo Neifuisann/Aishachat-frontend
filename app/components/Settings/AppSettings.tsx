@@ -35,7 +35,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
     const userFormRef = React.useRef<{ submitForm: () => void } | null>(null);
     const [deviceCode, setDeviceCode] = React.useState("");
     const [error, setError] = React.useState("");
-    
+
     const handleSave = () => {
         if (selectedUser.user_info.user_type === "doctor") {
             doctorFormRef.current?.submitForm();
@@ -91,7 +91,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                 user_info: {
                     user_type: userType,
                     user_metadata: values,
-                },  
+                },
             },
             selectedUser!.user_id);
     }
@@ -137,14 +137,14 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
-                        <div 
+                        <div
                             className={`rounded-full flex-shrink-0 h-2 w-2 ${
                                 isConnected ? 'bg-green-500' : 'bg-amber-500'
-                            }`} 
-                        />    
+                            }`}
+                        />
 
                         </div>
-                        
+
                         <div className="flex flex-row items-center gap-2 mt-2">
                             <Input
                                 value={deviceCode}
@@ -211,7 +211,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                         className="flex flex-row justify-between mt-4"
                     >
                         <Button
-                            variant="destructive_outline"
+                            variant="destructive"
                             size="sm"
                             className="font-medium flex flex-row items-center rounded-full gap-2 "
                         >

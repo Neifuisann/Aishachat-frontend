@@ -79,6 +79,7 @@ const config = {
             },
             fontFamily: {
                 inter: ["var(--font-inter)"],
+                nunito: ["var(--font-nunito)", "sans-serif"],
                 "inter-tight": ["var(--font-inter-tight)", "sans-serif"],
                 baloo2: ["var(--font-baloo2)"],
                 comicNeue: ["var(--font-comic-neue)"],

@@ -36,7 +36,7 @@ const PersonalityFilters = ({
                 className="rounded-full flex items-center gap-2 text-xs border-purple-200 text-purple-700 hover:bg-purple-50 hover:border-purple-300 hover:shadow-sm hover:shadow-purple-100 transition-all duration-200 [&[data-state=on]]:bg-gradient-to-r [&[data-state=on]]:from-purple-400 [&[data-state=on]]:to-pink-400 [&[data-state=on]]:text-white [&[data-state=on]]:border-transparent [&[data-state=on]]:shadow-lg [&[data-state=on]]:shadow-purple-200 [&[data-state=on]]:animate-pulse"
             >
                 <FaBookOpen className="h-4 w-4 text-purple-600" />
-                {"Story mode"}
+                {"Chế độ đọc chuyện"}
                 {selectedFilters.includes("is_story") && (
                     <X className="h-4 w-4" aria-hidden="true" />
                 )}
@@ -47,7 +47,7 @@ const PersonalityFilters = ({
                 className="rounded-full flex items-center gap-2 text-xs [&[data-state=on]]:bg-gray-200"
             >
                 <FaChild className="h-4 w-4 text-gray-800" />
-                {"For children"}
+                {"Cho trẻ em"}
                 {selectedFilters.includes("is_child_voice") && (
                     <X className="h-4 w-4" aria-hidden="true" />
                 )}
@@ -59,7 +59,7 @@ const PersonalityFilters = ({
                     className="rounded-full flex items-center gap-2 text-xs [&[data-state=on]]:bg-gray-200"
                 >
                     <FaHandHoldingMedical className="h-4 w-4 text-gray-800" />
-                    {"For caregivers"}
+                    {"Cho người chăm sóc"}
                     {selectedFilters.includes("is_doctor") && (
                         <X className="h-4 w-4" aria-hidden="true" />
                     )}

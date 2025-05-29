@@ -28,7 +28,7 @@ export default async function Home() {
             await createUser(supabase, user, {
                 personality_id:
                     user?.user_metadata?.personality_id ?? defaultPersonalityId,
-                language_code: "en-US",
+                language_code: "vi-VN",
             });
             redirect("/onboard");
         }

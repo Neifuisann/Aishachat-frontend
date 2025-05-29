@@ -52,7 +52,7 @@ const Playground: React.FC<PlaygroundProps> = ({
                 <div className="flex flex-row items-center gap-4 sm:gap-8 justify-between">
                     <div className="flex flex-row items-center gap-4 sm:gap-8">
                         <h1 className="text-3xl font-normal">
-                            {"Playground"}
+                            {"các nhân vật "}
                         </h1>
                         <div className="flex flex-col gap-8 items-center justify-center">
                         <TranscriptProvider>
@@ -67,20 +67,20 @@ const Playground: React.FC<PlaygroundProps> = ({
                 <HomePageSubtitles
                     user={currentUser}
                     page="home"
-                    languageCode={'en-US'}
+                    languageCode={'vi-VN'}
                 />
                     <div className="flex flex-col gap-2">
                         <PersonalityFilters
                             setSelectedFilters={setSelectedFilters}
                             selectedFilters={selectedFilters}
-                            languageState={'en-US'}
+                            languageState={'vi-VN'}
                             currentUser={currentUser}
                         />
                         <UserPersonalities
                             selectedFilters={selectedFilters}
                             onPersonalityPicked={onPersonalityPicked}
                             personalityIdState={personalityIdState}
-                            languageState={'en-US'}
+                            languageState={'vi-VN'}
                             disableButtons={false}
                             allPersonalities={isDoctor 
                                 ? allPersonalities.filter(p => p.is_story || p.is_doctor)

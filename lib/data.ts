@@ -4,10 +4,10 @@ export const defaultPersonalityId: string =
 
 export const paymentLink = "https://buy.stripe.com/bIY0033Dc7LB28o9AJ";
 export const discordInviteLink = "https://discord.gg/KJWxDPBRUj";
-export const tiktokLink = "https://www.tiktok.com/@elatoai";
-export const githubPublicLink = "https://github.com/akdeb/ElatoAI";
-export const businessDemoLink = "https://calendly.com/akadeb/elato-ai-demo";
-export const feedbackFormLink = "https://forms.gle/2QmukEG2FXNwBdee7";
+export const tiktokLink = "https://www.tiktok.com/@Aishaai";
+export const githubPublicLink = "https://github.com/akdeb/AishaAI";
+export const businessDemoLink = "https://calendly.com/akadeb/Aisha-ai-demo";
+export const feedbackFormLink = "https://forms.gle/addformhere";
 
 export const r2Url = "https://pub-cd736d767add4fecafea55c239c28497.r2.dev";
 export const r2UrlAudio = "https://pub-5fab8e2596c544cd8dc3e20812be2168.r2.dev";
@@ -23,11 +23,11 @@ export const voiceSampleUrl =
 export const userFormPersonaLabel =
     "Briefly describe yourself and your interests, personality, and learning style";
 export const userFormPersonaPlaceholder =
-    "Don't get me started on the guitar...I love to shred it like Hendrix. I also like a good challenge. Challenge me to be better and I'll rise to the occasion.";
-export const userFormAgeLabel = "Your Age";
+    "Đừng bắt tôi ăn ớt!";
+export const userFormAgeLabel = "Tuổi của bạn";
 export const userFormAgeDescription =
-    "Users under 13 years old must have a parent or guardian to setup Elato.";
-export const userFormNameLabel = "Your Name";
+    "Người dùng dưới 13 tuổi phải có cha mẹ hoặc người giám hộ để thiết lập Aisha.";
+export const userFormNameLabel = "Tên của bạn";
 
 export const INITIAL_CREDITS = 50;
 export const SECONDS_PER_CREDIT = (30 * 60) / INITIAL_CREDITS; // 30 minutes equals 50 credits
@@ -40,75 +40,75 @@ export const voices = [
     {
         id: "alloy",
         name: "Alloy",
-        description: "Neutral and balanced",
+        description: "Trung lập và cân bằng",
         color: "bg-blue-100",
         emoji: "🧑",
     },
     {
         id: "echo",
         name: "Echo",
-        description: "Warm and melodic",
+        description: "Ấm áp và hài hước",
         color: "bg-purple-100",
         emoji: "👩‍🎤",
     },
     {
         id: "shimmer",
         name: "Shimmer",
-        description: "Clear and bright",
+        description: "Rõ ràng và cao",
         color: "bg-cyan-100",
         emoji: "👱‍♀️",
     },
     {
         id: "ash",
         name: "Ash",
-        description: "Soft and thoughtful",
+        description: "Mềm mại và trưởng thành",
         color: "bg-gray-100",
         emoji: "🧔",
     },
     {
         id: "ballad",
         name: "Ballad",
-        description: "Melodic and emotive",
+        description: "Hài hước và cảm động",
         color: "bg-indigo-100",
         emoji: "🎭",
     },
     {
         id: "coral",
         name: "Coral",
-        description: "Warm and friendly",
+        description: "Ấm áp và thân thiện",
         color: "bg-orange-100",
         emoji: "👩",
     },
     {
         id: "sage",
         name: "Sage",
-        description: "Wise and measured",
+        description: "Thông thái và cân bằng",
         color: "bg-green-100",
         emoji: "🧓",
     },
     {
         id: "verse",
         name: "Verse",
-        description: "Poetic and expressive",
+        description: "Thơ mộng và cảm động",
         color: "bg-rose-100",
         emoji: "👨‍🎨",
     },
 ];
 
 export const emotionOptions = [
-    { value: "neutral", label: "Neutral", icon: "😐", color: "bg-red-100" },
+    { value: "neutral", label: "Trung lập", icon: "😐", color: "bg-red-100" },
     {
         value: "cheerful",
-        label: "Cheerful",
+        label: "Vui vẻ",
         icon: "😊",
         color: "bg-yellow-100",
     },
-    { value: "serious", label: "Serious", icon: "🧐", color: "bg-blue-100" },
-    { value: "calm", label: "Calm", icon: "😌", color: "bg-teal-100" },
-    { value: "excited", label: "Excited", icon: "😃", color: "bg-orange-100" },
+    { value: "serious", label: "Nghiêm túc", icon: "🧐", color: "bg-blue-100" },
+    { value: "calm", label: "Lặng lẽ", icon: "😌", color: "bg-teal-100" },
+    { value: "excited", label: "Hào hứng", icon: "😃", color: "bg-orange-100" },
     {
         value: "professional",
-        label: "Professional",
+        label: "Chuyên nghiệp",
         icon: "👔",
         color: "bg-green-100",
     },

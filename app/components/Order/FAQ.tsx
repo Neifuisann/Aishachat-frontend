@@ -29,8 +29,8 @@ const qna: qnaProps[] = [
         icon: <CreditCardIcon size={ICON_SIZE} />,
     },
     {
-        question: "How do I set up my Elato?",
-        answer: "Setting up your Elato is easy. Just press the main button on the device, find the ELATO-DEVICE wifi network, and register your device with your email. You'll be chatting with your favorite AI character in seconds.",
+        question: "How do I set up my Aisha?",
+        answer: "Setting up your Aisha is easy. Just press the main button on the device, find the Aisha-DEVICE wifi network, and register your device with your email. You'll be chatting with your favorite AI character in seconds.",
         icon: <PowerIcon size={ICON_SIZE} />,
     },
     {
@@ -39,18 +39,18 @@ const qna: qnaProps[] = [
         icon: <ShieldCheckIcon size={ICON_SIZE} />,
     },
     {
-        question: "Can I customize my Elato AI's voice and personality?",
+        question: "Can I customize my Aisha AI's voice and personality?",
         answer: "Yes! You can choose from a variety of voices and personalities for your AI character. As you interact more, it will naturally adapt to your preferences and conversation style.",
         icon: <Settings2Icon size={ICON_SIZE} />,
     },
     {
-        question: "Can I use Elato AI with my documents?",
+        question: "Can I use Aisha AI with my documents?",
         answer: "We are currently working on a robust Retrieval Augmented Generation (RAG) feature. It will be available very soon!",
         icon: <FileTextIcon size={ICON_SIZE} />,
     },
     {
-        question: "Can I use Elato AI with any home wifi network?",
-        answer: "Yes! Elato AI will automatically connect to up to 5 private wifi networks or your phone hotspot. If you are having trouble connecting, please try restarting the device.",
+        question: "Can I use Aisha AI with any home wifi network?",
+        answer: "Yes! Aisha AI will automatically connect to up to 5 private wifi networks or your phone hotspot. If you are having trouble connecting, please try restarting the device.",
         icon: <WifiIcon size={ICON_SIZE} />,
     },
 ];

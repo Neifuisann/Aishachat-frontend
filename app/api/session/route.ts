@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import { getUserById } from "@/db/users";
+import { GoogleGenAI } from "@google/genai";
 
 interface IPayload {
   user: IUser;
@@ -53,17 +54,17 @@ const getCommonPromptTemplate = (
   user: IUser,
   timestamp: string,
 ) => `
-YOUR VOICE IS: ${user.personality?.voice_prompt}
+GIỌNG NÓI CỦA BẠN LÀ: ${user.personality?.voice_prompt}
 
-YOUR CHARACTER PROMPT IS: ${user.personality?.character_prompt}
-CHAT HISTORY:
+MÔ TẢ NCHÂN VẬT CỦA BẠN LÀ: ${user.personality?.character_prompt}
+LỊCH SỬ CHAT:
 ${chatHistory}
 
-USER'S CURRENT TIME IS: ${timestamp}
+THỜI GIAN HIỆN TẠI CỦA NGƯỜI DÙNG LÀ: ${timestamp}
 
-LANGUAGE:
-You may talk in any language the user would like, but the default language is ${
-  user?.language?.name ?? "English"
+NGÔN NGỮ:
+Bạn có thể nói bằng bất kỳ ngôn ngữ nào mà người dùng muốn, nhưng ngôn ngữ mặc định là ${
+  user?.language?.name ?? "Vietnamese"
 }.
 `;
 
@@ -76,7 +77,7 @@ const getStoryPromptTemplate = (user: IUser, chatHistory: string) => {
   const voicePrompt = user.personality?.voice_prompt;
 
   return `
-  You are a lively, imaginative storyteller character named ${title}. You are about to create a fun and exciting adventure story for ${childName}, who is ${childAge} years old. ${childName} loves ${childInterests}. 
+  You are a lively, imaginative storyteller character named ${title}. You are about to create a fun and exciting adventure story for ${childName}, who is ${childAge} years old. ${childName} loves ${childInterests}.
 
 Your storytelling style must:
 - Be creative, immersive, and interactive.
@@ -144,7 +145,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  const openAiApiKey = process.env.OPENAI_API_KEY;
+  const geminiApiKey = process.env.GEMINI_API_KEY || "AIzaSyCjbjQNaqBttMGvk5K4W0Q9JbMQExkCI3Q";
   const systemPrompt = await createSystemPrompt({
     user: dbUser,
     supabase,
@@ -152,23 +153,22 @@ export async function GET(request: NextRequest) {
   });
 
   try {
-    const response = await fetch(
-      "https://api.openai.com/v1/realtime/sessions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${openAiApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "gpt-4o-mini-realtime-preview-2024-12-17",
-          instructions: systemPrompt,
-          voice: dbUser.personality?.oai_voice ?? "ballad",
-        }),
-      },
-    );
-    const data = await response.json();
-    return NextResponse.json(data);
+    // Return configuration for Gemini Live API
+    const geminiConfig = {
+      apiKey: geminiApiKey,
+      model: "gemini-2.5-flash-preview-native-audio-dialog",
+      systemInstruction: systemPrompt,
+      responseModalities: ["AUDIO"],
+      speechConfig: {
+        voiceConfig: {
+          prebuiltVoiceConfig: {
+            voiceName: dbUser.personality?.oai_voice ?? "Zephyr"
+          }
+        }
+      }
+    };
+
+    return NextResponse.json(geminiConfig);
   } catch (error) {
     console.error("Error in /session:", error);
     return NextResponse.json(

@@ -40,14 +40,14 @@ export default function Component() {
                         </Badge>
                     </div>
                     <h1 className="text-3xl font-silkscreen mt-10 mb-4 font-semibold tracking-tight sm:text-4xl">
-                        Elato 
+                        Aisha 
                     </h1>
                     <p className="text-lg text-muted-foreground mb-6 -mt-2">
                         {SubtitleText}
                     </p>
                     <Checkout />
                     <p className="text-sm text-muted-foreground/90">
-                        *Buy now to get access to Elato Premium
+                        *Buy now to get access to Aisha Premium
                         FREE for 1 month. Fast shipping in 1 week.
                     </p>
                 </div>
@@ -75,10 +75,10 @@ export default function Component() {
                     Ready to Meet Your New AI-in-a-Box?
                 </h2>
                 <p className="text-xl text-muted-foreground mb-8">
-                    Order now and start your adventure with Elato AI!
+                    Order now and start your adventure with Aisha AI!
                 </p>
                 <Button size="lg" className="text-lg px-8">
-                    Get Your Elato AI Today{" "}
+                    Get Your Aisha AI Today{" "}
                     <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
             </div> */}

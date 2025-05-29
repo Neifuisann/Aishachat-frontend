@@ -28,7 +28,7 @@ const UserPersonalities: React.FC<UserPersonalitiesProps> = ({
                     languageState={languageState}
                     personalityIdState={personalityIdState}
                     onPersonalityPicked={onPersonalityPicked}
-                    title={"My Characters"}
+                    title={"Các nhân vật của tôi"}
                     disableButtons={disableButtons}
                 />
             )}
@@ -37,7 +37,7 @@ const UserPersonalities: React.FC<UserPersonalitiesProps> = ({
             languageState={languageState}
             personalityIdState={personalityIdState}
             onPersonalityPicked={onPersonalityPicked}
-            title={"Characters"}
+            title={"Các nhân vật"}
             disableButtons={disableButtons}
             selectedFilters={selectedFilters}
         />

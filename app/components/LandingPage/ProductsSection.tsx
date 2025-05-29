@@ -20,7 +20,7 @@ type Product = {
 const products: Product[] = [
     {
         id: "1",
-        name: "Elato AI Device",
+        name: "Aisha AI Device",
         description: "Transform any toy into an AI companion with any voice and personality with our advanced conversational AI",
         price: 55,
 		url: "/products",
@@ -34,7 +34,7 @@ const products: Product[] = [
     },
     // {
     //     id: "2",
-    //     name: "Elato AI Dev Kit",
+    //     name: "Aisha AI Dev Kit",
     //     description: "Create custom AI experiences with our developer-friendly kit, complete with sensors and tutorials",
     //     price: 45,
 	// 	url: "/products/ai-devkit",
@@ -104,19 +104,6 @@ export default function ProductsSection() {
 											))}
 										</div> */}
                                     </div>
-
-                                    {/* Price and Button Section */}
-                                    <div className="flex flex-row items-center justify-end gap-4">
-                                        <p className="text-2xl font-bold text-purple-900">
-                                            ${product.price}
-                                        </p>
-                                        <Button 
-											size="lg"
-                                            className="w-full sm:w-auto flex-row items-center gap-2 px-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white border-0 text-md"
-                                        >
-                                            <ShoppingCart className="h-4 w-4" /> Buy Now
-                                        </Button>
-                                    </div></div>
                                 </div>
                             </CardContent>
                         </Card>

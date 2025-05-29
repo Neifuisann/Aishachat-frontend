@@ -76,7 +76,7 @@ export default async function Login({ searchParams }: LoginProps) {
     //   return redirect("/login?message=Check email to continue sign in process");
     // }
 
-    return redirect("/login?message=Check email to continue sign in process");
+    return redirect("/login?message=Kiểm tra email để tiếp tục");
   };
 
   return (
@@ -84,11 +84,11 @@ export default async function Login({ searchParams }: LoginProps) {
       <Card className="shadow-md sm:bg-white bg-transparent shadow-none">
         <CardHeader>
           <CardTitle className="flex flex-row gap-1 items-center">
-            Login to Elato
+            Đăng nhập vào Aisha
             <Sparkles size={20} fill="black" />
           </CardTitle>
           <CardDescription>
-            Login or sign up your account to continue
+            Đăng nhập hoặc đăng ký tài khoản để tiếp tục
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -110,11 +110,11 @@ export default async function Login({ searchParams }: LoginProps) {
             <input
               className="rounded-md px-4 py-2 bg-inherit border"
               name="email"
-              placeholder="you@example.com"
+              placeholder="ban@abc.com"
               required
             />
             <Label className="text-md" htmlFor="email">
-              Password
+              Mật khẩu
             </Label>
 
             <input
@@ -129,7 +129,7 @@ export default async function Login({ searchParams }: LoginProps) {
               className="text-xs text-foreground underline"
               href="/forgot-password"
             >
-              Forgot Password?
+              Quên mật khẩu?
             </Link>
 
             <SubmitButton
@@ -137,7 +137,7 @@ export default async function Login({ searchParams }: LoginProps) {
               className="text-sm font-medium bg-gray-100 hover:bg-gray-50 dark:text-stone-900 border-[0.1px] rounded-md px-4 py-2 text-foreground my-2"
               pendingText="Signing In..."
             >
-              Continue with Email
+              Tiếp tục với Email
             </SubmitButton>
             {searchParams?.message && (
               <p className="p-4 rounded-md border bg-green-50 border-green-400 text-gray-900 text-center text-sm">

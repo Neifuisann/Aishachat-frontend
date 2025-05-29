@@ -25,7 +25,7 @@ export default function Footer() {
                 isHome ? "pb-16" : "pb-2"
             } border-gray-200 flex flex-col sm:flex-row items-center sm:justify-center border-t-[1px] mx-auto text-center text-xs sm:gap-8 sm:py-1 py-2`}
         >
-            <div className="flex flex-row items-center gap-8">
+            {/* <div className="flex flex-row items-center gap-8">
                 <a href={feedbackFormLink} target="_blank">
                     <Button
                         variant="link"
@@ -38,11 +38,11 @@ export default function Footer() {
                     </Button>
                 </a>
                 <Label className={`font-normal text-xs text-gray-500`}>
-                    Elato AI © {new Date().getFullYear()} All rights
+                    Aisha AI © {new Date().getFullYear()} All rights
                     reserved.
                 </Label>
             </div>
-            {/* <Separator orientation="vertical" /> */}
+            
             <div
                 className={`flex-row items-center gap-8 ${
                     isHome && isMobile ? "hidden" : "flex"
@@ -91,7 +91,10 @@ export default function Footer() {
                 >
                     Terms of Service
                 </a>
-            </div>
+            </div> */}
+            <Label className={`font-normal text-xs text-gray-500`}>
+                Made by Long and Huy with love
+            </Label>
 
             {/* <ThemeSwitcher /> */}
         </footer>

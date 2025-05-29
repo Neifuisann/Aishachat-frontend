@@ -53,7 +53,7 @@ export const VoiceSettings = () => {
 
 	return (<div className="flex flex-col gap-4 w-full">
 	<div className="space-y-2">
-	<Label htmlFor="voice">Pick a voice</Label>
+	<Label htmlFor="voice">Chọn giọng nói</Label>
 	<div className="grid grid-cols-2 gap-3">
 	  {voices.map((voice) => (
 		<div 
@@ -94,7 +94,7 @@ export const VoiceSettings = () => {
   <div className="space-y-2">
   </div>
 	  <div className="space-y-3">
-		<Label className="block mb-2">Emotional Tone</Label>
+		<Label className="block mb-2">Cảm xúc giọng nói</Label>
 		<div className="grid grid-cols-3 gap-3">
 		  {emotionOptions.map((emotion) => (
 			<div 

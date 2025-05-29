@@ -7,32 +7,32 @@ interface HomePageSubtitlesProps {
 const HomePageSubtitles: React.FC<HomePageSubtitlesProps> = ({
     user,
     page,
-    languageCode = "en-US",
+    languageCode = "vi-VN",
 }) => {
     if (page === "home") {
         if (user.user_info.user_type === "doctor") {
             return (
                 <p className="text-sm text-gray-600">
-                    {"Use this playground or your device to engage your patients"}
+                    {"Sử dụng các nhân vật hoặc thiết bị của bạn để tương tác với bệnh nhân"}
                 </p>
             );
         } else {
             return (
                 <p className="text-sm text-gray-600">
-                    {"Talk to any AI character below"}
+                    {"Nói chuyện với bất kỳ nhân vật AI nào dưới đây"}
                 </p>
             );
         }
     } else if (page === "settings") {
         return (
             <p className="text-sm text-gray-600">
-                {"You can update your settings below"}
+                {"Bạn có thể cập nhật các cài đặt của bạn dưới đây"}
             </p>
         );
     } else if (page === "create") {
         return (
             <p className="text-sm text-gray-600">
-                {"Customize your character's voice, language, accent and much more"}
+                {"Tùy chỉnh giọng nói, ngôn ngữ, phong cách và nhiều hơn nữa của nhân vật của bạn"}
             </p>
         );
     }

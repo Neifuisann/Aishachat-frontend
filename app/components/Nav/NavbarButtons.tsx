@@ -45,19 +45,19 @@ const NavbarButtons: React.FC<NavbarButtonsProps> = ({
                     className="ml-4"
                     // className="bg-nav-bar rounded-full px-3"
                 >
-                    <Button
+                    {/* <Button
                         size="sm"
                         variant={"ghost"}
                         className="flex bg-nav-bar border-0 sm:mr-2 flex-row gap-2 items-center rounded-full"
                     >
                         <FaGithub className="text-xl" />
                         <p className="hidden sm:flex font-normal">GitHub</p>
-                    </Button>
+                    </Button> */}
                 </Link>
             )}
             {!isHome && !isMobile && (
                 <Link href={businessDemoLink} passHref tabIndex={-1}>
-                    <Button
+                    {/* <Button
                         size="sm"
                         variant="secondary"
                         className="flex flex-row gap-2 items-center rounded-full bg-nav-bar focus:shadow-none focus-visible:shadow-none"
@@ -66,7 +66,7 @@ const NavbarButtons: React.FC<NavbarButtonsProps> = ({
                         <span className="hidden sm:flex font-normal">
                             Business demo
                         </span>
-                    </Button>
+                    </Button> */}
                 </Link>
             )}
             <NavbarDropdownMenu user={user} stars={stars} />

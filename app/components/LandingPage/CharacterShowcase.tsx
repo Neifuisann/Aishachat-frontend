@@ -68,17 +68,17 @@ export const CharacterShowcase = ({ allPersonalities }: CharacterShowcaseProps) 
 
           <div className="order-1 lg:order-2 w-full lg:w-2/5">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
-              Meet Our AI Characters
+              Khám phá các nhân vật của chúng tôi
             </h2>
 			<p className="text-lg text-gray-600 mb-6">
-              Each character comes with specialized knowledge, voice and personality to make 
-              your interactions more engaging.
+              Mỗi nhân vật có kiến thức chuyên sâu, giọng nói và tính cách để làm cho 
+              cuộc giao tiếp của bạn trở nên thú vị hơn.
             </p>
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
-              <h3 className="font-semibold text-blue-800 mb-2">Personalized Experience</h3>
+              <h3 className="font-semibold text-blue-800 mb-2">Trải nghiệm cá nhân hóa</h3>
               <p className="text-blue-700">
-                Choose the character that best fits your needs or mood. You can switch between 
-                characters anytime during your conversation.
+                Chọn nhân vật phù hợp nhất với nhu cầu hoặc tâm trạng của bạn. Bạn có thể chuyển đổi giữa 
+                các nhân vật bất cứ lúc nào trong suốt cuộc trò chuyện của bạn.
               </p>
             </div>
           </div>

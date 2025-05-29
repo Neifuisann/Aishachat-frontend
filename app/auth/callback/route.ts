@@ -31,7 +31,7 @@ export async function GET(request: Request) {
             if (!userExists) {
                 // Create user if they don't exist
                 await createUser(supabase, user, {
-                    language_code: "en-US",
+                    language_code: "vi-VN",
                     personality_id:
                         user?.user_metadata?.personality_id ??
                         defaultPersonalityId,

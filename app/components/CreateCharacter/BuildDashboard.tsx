@@ -24,12 +24,12 @@ interface SettingsDashboardProps {
 }
 
 const formSchema = z.object({
-  title: z.string().min(2, "Minimum 2 characters").max(50, "Maximum 50 characters"),
-  description: z.string().min(50, "Minimum 50 characters").max(5000, "Maximum 5000 characters"),
-  prompt: z.string().min(100, "Minimum 100 characters").max(5000, "Maximum 5000 characters"),
-  voice: z.string().min(1, "Voice selection is required"),
+  title: z.string().min(2, "Tối thiểu 2 kí tự").max(50, "Tối đa 50 kí tự"),
+  description: z.string().min(50, "Tối thiểu 50 kí tự").max(5000, "Tối đa 5000 kí tự"),
+  prompt: z.string().min(100, "Tối thiểu 100 kí tự").max(5000, "Tối đa 5000 kí tự"),
+  voice: z.string().min(1, "Yêu cầu chọn giọng nói"),
   voiceCharacteristics: z.object({
-    features: z.string().min(10, "Minimum 10 characters").max(5000, "Maximum 5000 characters"),
+    features: z.string().min(10, "Tối thiểu 10 kí tự").max(5000, "Tối đa 5000 kí tự"),
     emotion: z.string()
   })
 });
@@ -47,7 +47,9 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
 
 
     const [languageState, setLanguageState] = useState<string>(
-        selectedUser.language_code! // Initial value from props
+        selectedUser.language_code && allLanguages.some(lang => lang.code === selectedUser.language_code)
+            ? selectedUser.language_code
+            : "vi-VN" // Default to Vietnamese
     );
 
     const [formData, setFormData] = useState({
@@ -66,13 +68,13 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
 
       const [formErrors, setFormErrors] = useState<Partial<Record<keyof FormData | 'features', string>>>({});
 
-      
+
       const [previewingVoice, setPreviewingVoice] = useState<string | null>(null);
-    
+
       const handleBlur = (field: keyof FormData | 'features') => {
         // Mark the field as touched
         setTouchedFields(prev => ({ ...prev, [field]: true }));
-        
+
         // Validate the field
         if (field === 'features') {
           validateField(field, formData.voiceCharacteristics.features);
@@ -80,7 +82,7 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
           validateField(field, formData[field] as string);
         }
       };
-      
+
       const validateField = (field: keyof FormData | 'features', value: string) => {
         try {
           if (field === 'features') {
@@ -103,19 +105,19 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
       const handleInputChange = (field: keyof FormData, value: string) => {
         const newFormData = { ...formData, [field]: value };
         setFormData(newFormData);
-        
+
         // Only validate if the field has been touched before
         if (touchedFields[field]) {
           validateField(field, value);
         }
       };
-    
+
     const handleVoiceCharacteristicChange = (characteristic: 'features' | 'emotion', value: string) => {
       const newVoiceCharacteristics = {
         ...formData.voiceCharacteristics,
         [characteristic]: value
       };
-      
+
       // Validate just this nested field
       try {
         formSchema.shape.voiceCharacteristics.shape[characteristic].parse(value);
@@ -128,24 +130,24 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
           setFormErrors(prev => ({ ...prev, [characteristic]: zodError.errors[0].message }));
         }
       }
-      
+
       setFormData({
         ...formData,
         voiceCharacteristics: newVoiceCharacteristics
       });
   };
-  
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     // Set submitting state to true
     setIsSubmitting(true);
-    
+
     // Validate the entire form
     const result = formSchema.safeParse(formData);
     console.log(result);
-    
+
     if (!result.success) {
       // Extract and set all validation errors
       const errors: Partial<Record<keyof FormData | 'features', string>> = {};
@@ -200,32 +202,32 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
 
       const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
 
-    
+
       const previewVoice = (voiceId: string) => {
         // Stop any currently playing preview
         if (audioElement) {
           audioElement.pause();
           audioElement.currentTime = 0;
         }
-        
+
         const audioSampleUrl = `${r2UrlAudio}/${voiceId}.wav`;
         setPreviewingVoice(voiceId);
-        
+
         // Create and play audio element
         const audio = new Audio(audioSampleUrl);
         setAudioElement(audio);
-        
+
         // Play the audio
         audio.play().catch(error => {
           console.error("Error playing audio:", error);
           setPreviewingVoice(null);
         });
-        
+
         // Reset the previewing state when audio ends
         audio.onended = () => {
           setPreviewingVoice(null);
         };
-        
+
         // Fallback in case audio doesn't trigger onended
         setTimeout(() => {
           if (previewingVoice === voiceId) {
@@ -239,7 +241,7 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
             <div className="flex flex-col gap-2">
                 <div className="flex flex-row gap-4 items-center sm:justify-normal justify-between max-w-screen-sm">
                     <div className="flex flex-row gap-4 items-center justify-between w-full">
-                        <h1 className="text-3xl font-normal">Create your AI Character</h1>
+                        <h1 className="text-3xl font-normal">Tạo nhân vật AI của bạn</h1>
                     </div>
                 </div>
                 <HomePageSubtitles user={selectedUser} page="create" />
@@ -251,56 +253,56 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
         <div className="overflow-hidden pb-2 w-full flex-auto flex flex-col pl-1 max-w-screen-sm">
             <Heading />
             <form onSubmit={handleSubmit} className="space-y-6 mt-8 w-full pr-1">
-          
+
             {currentStep === 'personality' ? <div className="space-y-4">
               <h2 className="text-lg font-semibold border-b border-gray-200 pb-2">
-                        Character Details
+                        Thông tin của nhân vật
                     </h2>
             <div className="space-y-2">
-              <Label htmlFor="title">Title</Label>
-              <Input 
+              <Label htmlFor="title">Tiêu đề</Label>
+              <Input
                 id="title"
-                placeholder="E.g., 'Storytelling Assistant'" 
+                placeholder="Ví dụ: 'Trợ lý kể chuyện'"
                 value={formData.title}
                 onChange={(e) => handleInputChange('title', e.target.value)}
                 onBlur={() => handleBlur('title')}
                               />
               <p className="text-sm flex justify-between">
     <span className={formErrors.title ? "text-red-500" : "text-gray-500"}>
-      {formErrors.title || "Give your AI character a name or title."}
+      {formErrors.title || "Đặt tên cho nhân vật AI của bạn."}
     </span>
     <span className="text-gray-500">{formData.title.length}/50</span>
   </p>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="description">Description</Label>
-              <Textarea 
+              <Label htmlFor="description">Mô tả</Label>
+              <Textarea
                 id="description"
-                placeholder="Describe what your AI character does and its personality..." 
+                placeholder="Mô tả nhân vật AI của bạn và mục đích của nó..."
                 rows={2}
                 value={formData.description}
                 onChange={(e) => handleInputChange('description', e.target.value)}
-                onBlur={() => handleBlur('description')}              />
+                onBlur={() => handleBlur('des cription')}              />
               <p className="text-sm flex justify-between">
     <span className={formErrors.description ? "text-red-500" : "text-gray-500"}>
-      {formErrors.description || "Briefly describe your character's purpose and personality."}
+      {formErrors.description || "Mô tả ngắn gọn về mục đích và tính cách của nhân vật."}
     </span>
     <span className="text-gray-500">{formData.description.length}/5000</span>
   </p>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="prompt">Prompt</Label>
-              <Textarea 
+              <Label htmlFor="prompt">Yêu cầu</Label>
+              <Textarea
                 id="prompt"
-                placeholder="Enter specific instructions for how your AI should respond..." 
+                placeholder="Nhập các yêu cầu cụ thể cho cách nhân vật AI của bạn phải phản hồi..."
                 rows={4}
                 value={formData.prompt}
                 onChange={(e) => handleInputChange('prompt', e.target.value)}
-                onBlur={() => handleBlur('prompt')} 
+                onBlur={() => handleBlur('prompt')}
                              />
               <p className="text-sm flex justify-between">
     <span className={formErrors.prompt ? "text-red-500" : "text-gray-500"}>
-      {formErrors.prompt || "Detailed instructions that define how your AI responds to users."}
+      {formErrors.prompt || "Các yêu cầu chi tiết xác định cách nhân vật AI của bạn phản hồi với người dùng."}
     </span>
     <span className="text-gray-500">{formData.prompt.length}/5000</span>
   </p>
@@ -308,21 +310,21 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
             </div> :
             <div className="space-y-4">
               <h2 className="text-lg font-semibold border-b border-gray-200 pb-2">
-                        Voice Details
+                        Chi tiết giọng nói
                     </h2>
             <div className="space-y-2">
-              <Label htmlFor="voice">Pick a voice</Label>
+              <Label htmlFor="voice">Chọn giọng nói</Label>
               <p className="text-sm text-gray-500">
-                Click a voice to preview how it sounds. Select one for your character.
+                Nhấn vào giọng nói để nghe thử. Chọn một giọng nói cho nhân vật của bạn.
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {voices.map((voice) => (
-                  <div 
+                  <div
                   key={voice.id}
                   className={`
                     rounded-lg border p-3 transition-all relative
-                    ${formData.voice === voice.id 
-                      ? 'border-2 border-blue-500 shadow-sm ' + voice.color 
+                    ${formData.voice === voice.id
+                      ? 'border-2 border-blue-500 shadow-sm ' + voice.color
                       : 'border-gray-200 hover:border-gray-300 cursor-pointer'
                     }
                   `}
@@ -341,7 +343,7 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
                         <span className="text-xs text-gray-600">{voice.description}</span>
                       </div>
                     </div>
-                    
+
                     {previewingVoice === voice.id && (
   <div className="absolute top-2 right-2">
     <div className="animate-pulse text-blue-500">
@@ -355,10 +357,10 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
               </div>
             </div>
             <div className="space-y-2">
-                  <Label htmlFor="voiceCharacteristics">Characteristics</Label>
-                  <Textarea 
+                  <Label htmlFor="voiceCharacteristics">Đặc điểm giọng nói</Label>
+                  <Textarea
   id="voiceCharacteristics"
-  placeholder="e.g., Medium pitch, Normal speed, Clear voice" 
+  placeholder="Ví dụ: Độ cao giọng, Tốc độ giọng, Giọng rõ ràng"
   className="w-full min-h-16"
   rows={2}
   value={formData.voiceCharacteristics.features}
@@ -380,21 +382,21 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
 />
 <p className="text-sm flex justify-between">
     <span className={formErrors.features ? "text-red-500" : "text-gray-500"}>
-      {formErrors.features || "Describe the voice characteristics."}
+      {formErrors.features || "Mô tả đặc điểm giọng nói."}
     </span>
     <span className="text-gray-500">{formData.voiceCharacteristics.features.length}/5000</span>
   </p>
             </div>
                 <div className="space-y-3">
-                  <Label className="block mb-2">Emotional Tone</Label>
+                  <Label className="block mb-2">Cảm xúc giọng nói</Label>
                   <div className="grid grid-cols-3 gap-3">
                     {emotionOptions.map((emotion) => (
-                      <div 
+                      <div
                         key={emotion.value}
                         className={`
                           rounded-lg border p-3 cursor-pointer transition-all
-                          ${formData.voiceCharacteristics.emotion === emotion.value 
-                            ? 'border-2 border-blue-500 shadow-sm ' + emotion.color 
+                          ${formData.voiceCharacteristics.emotion === emotion.value
+                            ? 'border-2 border-blue-500 shadow-sm ' + emotion.color
                             : 'border-gray-200 hover:border-gray-300'
                           }
                         `}
@@ -409,38 +411,38 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
                   </div>
                 </div>
             </div>}
-           
-           
+
+
             {currentStep === 'personality' ? (
-          <Button 
+          <Button
             onClick={() => setCurrentStep('voice')}
             className="ml-auto flex flex-row gap-2 items-center"
           >
-            Add Voice Features <ArrowRight className="w-4 h-4" />
+            Thêm đặc điểm giọng nói <ArrowRight className="w-4 h-4" />
           </Button>
         ) : (
             <div className="w-full flex justify-between">
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               className="flex flex-row gap-2 items-center"
               onClick={() => setCurrentStep('personality')}
             >
-              <ArrowLeft className="w-4 h-4" /> Back 
+              <ArrowLeft className="w-4 h-4" /> Quay lại
             </Button>
-            <Button 
+            <Button
       variant="default"
       className="flex flex-row gap-2 items-center"
       type="submit"
       disabled={
-        isSubmitting || 
-        formData.title === '' || 
-        formData.description === '' || 
-        formData.prompt === '' || 
-        formData.voice === '' || 
+        isSubmitting ||
+        formData.title === '' ||
+        formData.description === '' ||
+        formData.prompt === '' ||
+        formData.voice === '' ||
         formData.voiceCharacteristics.features === ''
       }
     >
-      {isSubmitting ? "Creating..." : "Create"} {!isSubmitting && <Check className="w-4 h-4" />}
+      {isSubmitting ? "Đang tạo..." : "Hoàn tất"} {!isSubmitting && <Check className="w-4 h-4" />}
     </Button>
           </div>
         )}

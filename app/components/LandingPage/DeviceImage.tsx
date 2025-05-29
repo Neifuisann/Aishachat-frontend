@@ -19,9 +19,11 @@ export const DeviceImage = () => {
             >
                 <Image
                     src="/products/box43.png"
-                    alt="Elato Toy"
+                    alt="Aisha Toy"
                     fill
                     className="object-contain object-center mr-6 rounded-3xl"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
                 />
             </motion.div>
         </div>

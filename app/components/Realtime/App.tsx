@@ -16,7 +16,8 @@ import { useEvent } from "@/app/components/Realtime/contexts/EventContext";
 import { useHandleServerEvent } from "./hooks/useHandleServerEvent";
 
 // Utilities
-import { createRealtimeConnection } from "./lib/realtimeConnection";
+import { createGeminiConnection, sendAudioToGemini, convertAudioToPCM } from "./lib/realtimeConnection";
+import { Session } from '@google/genai';
 import { toast } from "@/components/ui/use-toast";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Transcript from "./components/Transcript";
@@ -47,7 +48,7 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const [personality, setPersonality] = useState<IPersonality | null>(null);
-  
+
   useEffect(() => {
     const fetchPersonality = async () => {
       if (personalityIdState) {
@@ -55,15 +56,14 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
         setPersonality(personalityData);
       }
     };
-    
+
     fetchPersonality();
   }, [personalityIdState, supabase]);
 
 
-  const [dataChannel, setDataChannel] = useState<RTCDataChannel | null>(null);
-  const pcRef = useRef<RTCPeerConnection | null>(null);
-  const dcRef = useRef<RTCDataChannel | null>(null);
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const geminiSessionRef = useRef<Session | null>(null);
+  const mediaStreamRef = useRef<MediaStream | null>(null);
   const [sessionStatus, setSessionStatus] =
     useState<SessionStatus>("DISCONNECTED");
 
@@ -75,16 +75,32 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
     useState<boolean>(true);
 
   const sendClientEvent = (eventObj: any, eventNameSuffix = "") => {
-    if (dcRef.current && dcRef.current.readyState === "open") {
+    if (geminiSessionRef.current) {
       logClientEvent(eventObj, eventNameSuffix);
-      dcRef.current.send(JSON.stringify(eventObj));
+
+      // Convert OpenAI-style events to Gemini format
+      if (eventObj.type === "conversation.item.create" && eventObj.item?.content) {
+        const textContent = eventObj.item.content.find((c: any) => c.type === "input_text");
+        if (textContent) {
+          geminiSessionRef.current.sendClientContent({
+            turns: [{
+              role: "user",
+              parts: [{ text: textContent.text }]
+            }],
+            turnComplete: true
+          });
+        }
+      } else if (eventObj.type === "response.create") {
+        // Gemini automatically responds, no need to explicitly trigger
+        console.log("Response creation triggered for Gemini");
+      }
     } else {
       logClientEvent(
         { attemptedEvent: eventObj.type },
-        "error.data_channel_not_open"
+        "error.gemini_session_not_available"
       );
       console.error(
-        "Failed to send message - no data channel available",
+        "Failed to send message - no Gemini session available",
         eventObj
       );
     }
@@ -110,22 +126,22 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
     }
   }, [sessionStatus]);
 
-  const fetchEphemeralKey = async (): Promise<string | null> => {
-    logClientEvent({ url: "/session" }, "fetch_session_token_request");
+  const fetchGeminiConfig = async (): Promise<any | null> => {
+    logClientEvent({ url: "/session" }, "fetch_gemini_config_request");
     const tokenResponse = await fetch("/api/session");
     const data = await tokenResponse.json();
-    logServerEvent(data, "fetch_session_token_response");
+    logServerEvent(data, "fetch_gemini_config_response");
 
-    if (!data.client_secret?.value) {
-      logClientEvent(data, "error.no_ephemeral_key");
+    if (!data.apiKey) {
+      logClientEvent(data, "error.no_gemini_api_key");
       setSessionStatus("DISCONNECTED");
       toast({
-        description: "Your API key is likely invalid. Please update it in Settings.",
+        description: "Your Gemini API key is invalid. Please update it in Settings.",
       });
       return null;
     }
 
-    return data.client_secret.value;
+    return data;
   };
 
   const connectToRealtime = async () => {
@@ -133,8 +149,8 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
     setSessionStatus("CONNECTING");
 
     try {
-      const EPHEMERAL_KEY = await fetchEphemeralKey();
-      if (!EPHEMERAL_KEY) {
+      const geminiConfig = await fetchGeminiConfig();
+      if (!geminiConfig) {
         return;
       }
 
@@ -143,47 +159,41 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
       }
       audioElementRef.current.autoplay = isAudioPlaybackEnabled;
 
-      const { pc, dc } = await createRealtimeConnection(
-        EPHEMERAL_KEY,
-        audioElementRef
+      const { session, mediaStream } = await createGeminiConnection(
+        geminiConfig,
+        audioElementRef,
+        (message: any) => {
+          handleServerEventRef.current(message);
+        },
+        (error: any) => {
+          console.error("Gemini connection error:", error);
+          setSessionStatus("DISCONNECTED");
+        }
       );
-      pcRef.current = pc;
-      dcRef.current = dc;
 
-      dc.addEventListener("open", () => {
-        logClientEvent({}, "data_channel.open");
-      });
-      dc.addEventListener("close", () => {
-        logClientEvent({}, "data_channel.close");
-      });
-      dc.addEventListener("error", (err: any) => {
-        logClientEvent({ error: err }, "data_channel.error");
-      });
-      dc.addEventListener("message", (e: MessageEvent) => {
-        handleServerEventRef.current(JSON.parse(e.data));
-      });
+      geminiSessionRef.current = session;
+      mediaStreamRef.current = mediaStream;
+      setSessionStatus("CONNECTED");
 
-      setDataChannel(dc);
+      logClientEvent({}, "gemini_session.connected");
     } catch (err) {
-      console.error("Error connecting to realtime:", err);
+      console.error("Error connecting to Gemini:", err);
       setSessionStatus("DISCONNECTED");
     }
   };
 
   const disconnectFromRealtime = () => {
-    if (pcRef.current) {
-      pcRef.current.getSenders().forEach((sender) => {
-        if (sender.track) {
-          sender.track.stop();
-        }
-      });
-
-      pcRef.current.close();
-      pcRef.current = null;
+    if (geminiSessionRef.current) {
+      geminiSessionRef.current.close();
+      geminiSessionRef.current = null;
     }
-    setDataChannel(null);
+
+    if (mediaStreamRef.current) {
+      mediaStreamRef.current.getTracks().forEach(track => track.stop());
+      mediaStreamRef.current = null;
+    }
+
     setSessionStatus("DISCONNECTED");
-    setIsPTTUserSpeaking(false);
 
     logClientEvent({}, "disconnected");
   };
@@ -211,40 +221,9 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
   };
 
   const updateSession = (shouldTriggerResponse: boolean = false) => {
-    sendClientEvent(
-      { type: "input_audio_buffer.clear" },
-      "clear audio buffer on session update"
-    );
-
-    const currentAgent = selectedAgentConfigSet?.find(
-      (a) => a.name === selectedAgentName
-    );
-
-    const turnDetection = isPTTActive
-      ? null
-      : {
-          type: "server_vad",
-          threshold: 0.5,
-          prefix_padding_ms: 300,
-          silence_duration_ms: 200,
-          create_response: true,
-        };
-
-    const tools = currentAgent?.tools || [];
-
-    const sessionUpdateEvent = {
-      type: "session.update",
-      session: {
-        modalities: ["text", "audio"],
-        input_audio_format: "pcm16",
-        output_audio_format: "pcm16",
-        input_audio_transcription: { model: "whisper-1" },
-        turn_detection: turnDetection,
-        tools,
-      },
-    };
-
-    sendClientEvent(sessionUpdateEvent);
+    // Gemini Live API doesn't require session updates like OpenAI
+    // Configuration is set during connection
+    console.log("Session update requested for Gemini (no action needed)");
 
     if (shouldTriggerResponse) {
       sendSimulatedUserMessage(isDoctor ? "Ask the doctor if everything is good and how you can help them and their patient." : "The user is initiating a new chat here. Say something!");
@@ -278,16 +257,9 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
       return;
     }
 
-    sendClientEvent({
-      type: "conversation.item.truncate",
-      item_id: mostRecentAssistantMessage?.itemId,
-      content_index: 0,
-      audio_end_ms: Date.now() - mostRecentAssistantMessage.createdAtMs,
-    });
-    sendClientEvent(
-      { type: "response.cancel" },
-      "(cancel due to user interruption)"
-    );
+    // For Gemini, we can interrupt by sending new input
+    // The Live API handles interruptions automatically
+    console.log("Interrupting Gemini response (handled automatically by Live API)");
   };
 
   const handleSendTextMessage = () => {
@@ -356,7 +328,7 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
 
   const handleSheetOpenChange = (open: boolean) => {
     setIsSheetOpen(open);
-    
+
     // If sheet is closed, disconnect
     if (!open && (sessionStatus === "CONNECTED" || sessionStatus === "CONNECTING")) {
       disconnectFromRealtime();
@@ -376,8 +348,8 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
         isDoctor={isDoctor}
       />
     </div>
-  <SheetContent 
-    side={isMobile ? "bottom" : "right"} 
+  <SheetContent
+    side={isMobile ? "bottom" : "right"}
     className="h-[80vh] md:h-full p-0"
     style={{ maxWidth: isMobile ? "100%" : "50%" }}
   >
@@ -389,7 +361,7 @@ function App({ personalityIdState, isDoctor, userId }: AppProps) {
           onSendMessage={handleSendTextMessage}
           canSend={
             sessionStatus === "CONNECTED" &&
-            dcRef.current?.readyState === "open"
+            geminiSessionRef.current !== null
           }
           personality={personality}
           userId={userId}

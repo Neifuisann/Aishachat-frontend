@@ -96,7 +96,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
             selectedUser!.user_id);
     }
     toast({
-        description: "Your prefereces have been saved!",
+        description: "Cài đặt của bạn đã được lưu!",
     });
 }
 
@@ -119,13 +119,13 @@ const AppSettings: React.FC<AppSettingsProps> = ({
             )}
             <section className="space-y-4 max-w-screen-sm mt-12">
                 <h2 className="text-lg font-semibold border-b border-gray-200 pb-2">
-                    Device settings
+                    Cài đặt thiết bị
                 </h2>
                 <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-2">
                     <div className="flex flex-row items-center gap-2">
                     <Label className="text-sm font-medium text-gray-700">
-                            Register your device
+                            Đăng ký thiết bị của bạn
                         </Label>
                         <TooltipProvider>
                           <Tooltip>
@@ -133,7 +133,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                               ?
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>For simplicity, you can register your ESP32 MAC address here. <br /> Ideally you want this to be a friendly code for your device.</p>
+                              <p>Đơn giản hóa, bạn có thể đăng ký địa chỉ MAC của ESP32 của bạn ở đây. <br /> Tốt nhất là bạn muốn mã này là mã thân thiện cho thiết bị của bạn.</p>
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
@@ -150,7 +150,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                                 value={deviceCode}
                                 disabled={isConnected}
                                 onChange={(e) => setDeviceCode(e.target.value)}
-                                placeholder={isConnected ? "**********" : "Enter your ESP32-S3 MAC address"}
+                                placeholder={isConnected ? "**********" : "Nhập địa chỉ MAC của ESP32-S3 của bạn"}
                             />
                             <Button
                                 size="sm"
@@ -164,19 +164,19 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                                     checkIfUserHasDevice();
                                 }}
                             >
-                                Register
+                                Đăng ký
                             </Button>
                         </div>
                         <p className="text-xs text-gray-400">
-                            {isConnected ? <span className="font-medium text-gray-800">Registered!</span> :
+                            {isConnected ? <span className="font-medium text-gray-800">Đã đăng ký thành công!</span> :
                                 error ? <span className="text-red-500">{error}.</span> :
-                                "Add your ESP32-S3 MAC address (e.g. 12:34:56:78:9A:BC) to your account to register it."
+                                "Thêm địa chỉ MAC của ESP32-S3 của bạn (ví dụ: 12:34:56:78:9A:BC) vào tài khoản của bạn để đăng ký nó."
                         }
                         </p>
                     </div>
                     <div className="flex flex-col gap-2 mt-2">
                         <Label className="text-sm font-medium text-gray-700">
-                            Logged in as
+                            Đăng nhập với tư cách
                         </Label>
                         <Input
                             // autoFocus
@@ -216,7 +216,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                             className="font-medium flex flex-row items-center rounded-full gap-2 "
                         >
                             <LogOut size={18} strokeWidth={2} />
-                            <span>Logout</span>
+                            <span>Đăng xuất</span>
                             </Button>
                         </form>
                 </div>

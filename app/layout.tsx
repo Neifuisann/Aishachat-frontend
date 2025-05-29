@@ -2,6 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import { Product, WithContext } from "schema-dts";
 import {
     Inter,
+    Nunito,
     Baloo_2,
     Comic_Neue,
     Quicksand,
@@ -27,13 +28,19 @@ const karla = Karla({
 	variable: "--font-karla",
 });
 
+const nunito = Nunito({
+    subsets: ["latin", "vietnamese"],
+    display: "swap",
+    variable: "--font-nunito",
+    weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 import Script from "next/script";
 import { Navbar } from "./components/Nav/Navbar";
 import { getUserById } from "@/db/users";
 
 const inter = Inter({
-    subsets: ["latin"],
+    subsets: ["latin", "vietnamese"],
     display: "swap",
     variable: "--font-inter",
 });
@@ -91,7 +98,7 @@ const silkscreen = Silkscreen({
     weight: ["400"],
 });
 
-const fonts = `${inter.variable} ${inter_tight.variable} ${baloo2.variable} ${comicNeue.variable} ${quicksand.variable} ${fredoka.variable} ${lora.variable} ${karla.variable} ${borel.variable} ${silkscreen.variable}`;
+const fonts = `${inter.variable} ${nunito.variable} ${inter_tight.variable} ${baloo2.variable} ${comicNeue.variable} ${quicksand.variable} ${fredoka.variable} ${lora.variable} ${karla.variable} ${borel.variable} ${silkscreen.variable}`;
 
 const defaultUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
@@ -101,17 +108,17 @@ export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
     title: {
         default:
-            "Elato AI: The Compact Device to Bring AI Characters to Life",
+            "Aisha AI: The Compact Device to Bring AI Characters to Life",
         template:
-            "%s | Elato AI - The Compact Device to Bring AI Characters to Life",
+            "%s | Aisha AI - The Compact Device to Bring AI Characters to Life",
     },
-    applicationName: "Elato AI",
+    applicationName: "Aisha AI",
     description:
-        "Elato is an AI-enabled device that brings objects to life through conversational AI. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
+        "Aisha is an AI-enabled device that brings objects to life through conversational AI. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
     authors: [
         {
-            name: "Akashdeep Deb",
-            url: "https://linkedin.com/in/akashdeep-deb",
+            name: "Aisha Team",
+            url: "https://Aishaai.com",
         },
     ],
     keywords: [
@@ -122,7 +129,7 @@ export const metadata: Metadata = {
         "empathetic companion",
         "voice assistant",
         "emotional growth",
-        "Elato AI",
+        "Aisha AI",
         "conversational AI",
         "google home",
         "amazon echo",
@@ -134,18 +141,18 @@ export const metadata: Metadata = {
         "smart AI device",
     ],
     openGraph: {
-        title: "Elato AI: The Compact Device to Bring AI Characters to Life",
+        title: "Aisha AI: The Compact Device to Bring AI Characters to Life",
         description:
-            "Elato brings objects to life through engaging, conversational AI experiences. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
-        siteName: "Elato AI",
-        locale: "en-US",
+            "Aisha brings objects to life through engaging, conversational AI experiences. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
+        siteName: "Aisha AI",
+        locale: "vi-VN",
         type: "website",
         images: [
             {
-                url: "https://elatoai.com/images/orange.png",
+                url: "https://Aishaai.com/images/orange.png",
                 width: 1200,
                 height: 630,
-                alt: "Elato AI conversational device - Front View",
+                alt: "Aisha AI conversational device - Front View",
             },
         ],
     },
@@ -154,33 +161,33 @@ export const metadata: Metadata = {
         follow: true,
     },
     generator: "Next.js",
-    creator: "Elato Team",
-    publisher: "Elato AI Ltd.",
+    creator: "Aisha Team",
+    publisher: "Aisha AI Ltd.",
     alternates: {
-        canonical: "https://elatoai.com",
+        canonical: "https://Aishaai.com",
         languages: {
-            "en-US": "https://elatoai.com",
-            "zh-CN": "https://elatoai.com",
+            "vi-VN": "https://Aishaai.com",
+            "zh-CN": "https://Aishaai.com",
         },
     },
     icons: {
-        icon: "https://elatoai.com/favicon.ico",
-        apple: "https://elatoai.com/favicon.ico",
+        icon: "https://Aishaai.com/favicon.ico",
+        apple: "https://Aishaai.com/favicon.ico",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Elato - An AI-powered device that brings objects to life through engaging, conversational experiences",
+        title: "Aisha - An AI-powered device that brings objects to life through engaging, conversational experiences",
         description:
-            "More than a device, Elato is your gateway to a world where AI brings magic to the ordinary through engaging learning and interactive experiences.",
-        images: ["https://elatoai.com/images/orange.png"],
+            "More than a device, Aisha is your gateway to a world where AI brings magic to the ordinary through engaging learning and interactive experiences.",
+        images: ["https://Aishaai.com/images/orange.png"],
     },
-    assets: "https://elatoai.com/images",
+    assets: "https://Aishaai.com/images",
     formatDetection: {
         telephone: false,
     },
     appleWebApp: {
         capable: true,
-        title: "Elato AI",
+        title: "Aisha AI",
         statusBarStyle: "black-translucent",
     },
     category: "AI device",
@@ -196,23 +203,23 @@ export const viewport: Viewport = {
 const jsonLd: WithContext<Product> = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: "Elato AI",
+    name: "Aisha AI",
     description:
-        "Elato is an AI-enabled device that brings objects to life through conversational AI. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
+        "Aisha is an AI-enabled device that brings objects to life through conversational AI. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
     brand: {
         "@type": "Brand",
-        name: "Elato AI",
+        name: "Aisha AI",
     },
     offers: {
         "@type": "Offer",
-        url: "https://elatoai.com",
+        url: "https://Aishaai.com",
         priceCurrency: "USD",
         price: "57.99",
         priceValidUntil: "2024-12-31", // set a realistic date in the future
         availability: "https://schema.org/InStock",
         seller: {
             "@type": "Organization",
-            name: "Elato AI Ltd.",
+            name: "Aisha AI Ltd.",
         },
         hasMerchantReturnPolicy: {
             "@type": "MerchantReturnPolicy",
@@ -291,7 +298,7 @@ const jsonLd: WithContext<Product> = {
                 "Really cool project you've got going on, hoping one day it might use a local llm",
         },
     ],
-    image: "https://elatoai.com/images/orange.png",
+    image: "https://Aishaai.com/images/orange.png",
     category: "Interactive AI Device",
 };
 
@@ -302,7 +309,7 @@ export default async function RootLayout({
 }) {
     const supabase = createClient();
 
-    const { stars } = await fetchGithubStars("akdeb/ElatoAI");
+    const { stars } = await fetchGithubStars("akdeb/AishaAI");
 
     const {
         data: { user },
@@ -321,7 +328,7 @@ export default async function RootLayout({
             suppressHydrationWarning
         >
             <head>
-                <link rel="canonical" href="https://www.elatoai.com" />
+                <link rel="canonical" href="https://www.Aishaai.com" />
                 <Script
                     id="product-schema"
                     type="application/ld+json"
@@ -330,8 +337,8 @@ export default async function RootLayout({
                     }}
                 />
             </head>
-            <body className="bg-background text-foreground flex flex-col min-h-screen bg-gray-50 font-karla">
-                <NextTopLoader showSpinner={false} color="#facc15" />
+            <body className="bg-background text-foreground flex flex-col min-h-screen bg-[#FEFBFF] font-nunito">
+                <NextTopLoader showSpinner={false} color="#7C3AED" />
 
                 {/* <ThemeProvider
                     attribute="class"

@@ -62,7 +62,7 @@ export function NavbarDropdownMenu({ user, stars }: NavbarMenuButtonProps) {
                     className="flex flex-row gap-2 w-full"
                 >
                     <HomeIcon size={ICON_SIZE} />
-                    <span>Home</span>
+                    <span>Trang chủ</span>
                 </Link>
             </DropdownMenuItem>
         );
@@ -77,7 +77,7 @@ export function NavbarDropdownMenu({ user, stars }: NavbarMenuButtonProps) {
                     className="flex flex-row gap-2 w-full"
                 >
                     <LogIn size={ICON_SIZE} />
-                    <span>Login</span>
+                    <span>Đăng nhập</span>
                 </Link>
             </DropdownMenuItem>
         );
@@ -103,7 +103,7 @@ export function NavbarDropdownMenu({ user, stars }: NavbarMenuButtonProps) {
                     shadow-none focus:shadow-none focus-visible:shadow-none"                    >
                     <Menu size={20} />
                     <span className="hidden sm:flex font-normal">
-                        {user ? "Home" : "Login"}
+                        {user ? "Trang chủ" : "Đăng nhập"}
                     </span>
                 </Button>
             </DropdownMenuTrigger>
@@ -123,58 +123,16 @@ export function NavbarDropdownMenu({ user, stars }: NavbarMenuButtonProps) {
                 </DropdownMenuGroup>
                 <DropdownMenuItem>
                     <Link
-                        href={githubPublicLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="Visit our GitHub"
-                        className="flex flex-row items-center gap-2 w-full"
-                    >
-                        <FaGithub size={ICON_SIZE} />
-                        <span>GitHub</span>
-                       
-                    </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <Link
-                        href={discordInviteLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-row items-center gap-2 w-full"
-                    >
-                        <FaDiscord size={ICON_SIZE} />
-                        <span>Discord</span>
-                    </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                    <Link
                         href={feedbackFormLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex flex-row items-center gap-2 w-full"
                     >
                         <Mail size={ICON_SIZE - 2} />
-                        <span>Send feedback</span>
+                        <span>Gửi phản hồi</span>
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <Link
-                    href="/products"
-                    passHref
-                    className="flex rounded-lg flex-row gap-2 items-center w-full bg-amber-100 dark:bg-amber-900/40 px-2 py-1 text-amber-800 dark:text-amber-200 hover:bg-yellow-100 dark:hover:bg-amber-900/60 transition-colors"
-                >
-                    <Box
-                        size={ICON_SIZE}
-                        className="text-amber-600 dark:text-amber-400"
-                    />
-                    <div className="flex flex-col">
-                        <span className="font-medium text-sm text-amber-900 dark:text-amber-200">
-                            Buy Now
-                        </span>
-                        <span className="text-xs text-amber-600 dark:text-amber-400">
-                            Elato AI Toy
-                        </span>
-                    </div>
-                </Link>
             </DropdownMenuContent>
         </DropdownMenu>
     );

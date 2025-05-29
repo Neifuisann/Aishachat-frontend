@@ -2,7 +2,7 @@ import Link from "next/link"
 import { ChevronRight, Zap, Star, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import VideoPlayer from "./components/LandingPage/VideoPlayer"
-import { DEVICE_COST, discordInviteLink, SUBSCRIPTION_COST, tiktokLink, videoSrc, videoSrc2, videoSrc3, videoSrc4 } from "@/lib/data";
+import { discordInviteLink, tiktokLink, videoSrc, videoSrc2, videoSrc3, videoSrc4 } from "@/lib/data";
 import { createClient } from "@/utils/supabase/server"
 import { getAllPersonalities } from "@/db/personalities"
 import { CharacterShowcase } from "./components/LandingPage/CharacterShowcase";
@@ -16,73 +16,62 @@ export default async function LandingPage() {
   const allPersonalities = await getAllPersonalities(supabase);
   const adultPersonalities = allPersonalities.filter((personality) => !personality.is_story && !personality.is_child_voice);
   return (
-    <div className="flex min-h-screen flex-col bg-[#FCFAFF]">
+    <div className="flex min-h-screen flex-col bg-[#FEFBFF]">
       <main className="flex-1">
         {/* Hero Section */}
         <section className="w-full py-12 md:py-20">
           <div className="container px-4 md:px-6 max-w-screen-lg mx-auto">
             <div className="grid gap-6 lg:grid-cols-1 lg:gap-12 items-center">
               <div className="flex flex-col items-center justify-center space-y-4">
-                <h1 className="text-5xl text-center md:text-6xl font-bold tracking-tight text-purple-900" style={{ lineHeight: '1.2' }}>
-               
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">
-                  Realtime, Conversational AI
-                  </span>{" "} on ESP32 with Arduino and Edge Functions
+                <h1 className="text-5xl text-center md:text-6xl font-bold tracking-tight text-gray-900" style={{ lineHeight: '1.2' }}>
+
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-orange-500 to-cyan-500">
+                  AI Đối Thoại theo Thời Gian Thực
+                  </span>{" "} trên ESP32 với Arduino và Edge Functions
                 </h1>
 
                 <p className="text-xl text-gray-600 text-center max-w-[600px]">
-                  Attach your <span className="font-silkscreen mx-1">Elato</span> device to any toy or plushie and watch them become AI characters you can talk
-                  to!
+                  Gắn thiết bị <span className="font-silkscreen mx-1">Aisha</span> của bạn vào bất kỳ đồ chơi hoặc thú nhồi bông nào và xem chúng trở thành nhân vật AI mà bạn có thể nói chuyện cùng!
                 </p>
 
                 <div className="flex flex-col gap-4  sm:gap-8 pt-4">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Link href={"/products"}>
-                      <Button
-                        size="lg"
-                        className="w-full sm:w-auto flex-row items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white border-0 text-lg h-14"
-                      >
-                        <span>Get Elato Now</span>
-                        <ChevronRight className="ml-2 h-5 w-5" />
-                      </Button>
-                    </Link>
-                    
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link href="/home">
                       <Button
                         size="lg"
                         variant="outline"
-                        className="w-full sm:w-auto flex-row items-center gap-2 border-purple-600 text-purple-600 hover:bg-purple-50 text-lg h-14"
+                        className="w-full sm:w-auto flex-row items-center gap-2 border-violet-600 text-violet-600 hover:bg-violet-50 text-lg h-14"
                       >
-                        <span>See Characters</span>
+                        <span>Bắt đầu</span>
                         <Home className="ml-2 h-5 w-5" />
                       </Button>
                     </Link>
                   </div>
-                  
+
                   <div className="flex items-center space-x-2 justify-center text-amber-500 mb-4">
                     <Star className="fill-amber-500" />
                     <Star className="fill-amber-500" />
                     <Star className="fill-amber-500" />
                     <Star className="fill-amber-500" />
                     <Star className="fill-amber-500" />
-                    <span className="ml-2 text-gray-700">200+ Happy Customers</span>
+                    <span className="ml-2 text-gray-700">2+ đánh giá tích cực</span>
                   </div>
                   {/* <div className="flex items-center space-x-3">
-                      <Link href="https://discord.gg/your-discord" target="_blank" rel="noopener noreferrer" 
+                      <Link href="https://discord.gg/your-discord" target="_blank" rel="noopener noreferrer"
                         className="text-purple-600 hover:text-purple-800 transition-colors">
                           <FaDiscord size={24} />
                       </Link>
-                      <Link href="https://tiktok.com/@elatoai" target="_blank" rel="noopener noreferrer"
+                      <Link href="https://tiktok.com/@Aishaai" target="_blank" rel="noopener noreferrer"
                         className="text-purple-600 hover:text-purple-800 transition-colors">
                         <FaTiktok size={24} />
                       </Link>
                     </div> */}
-                 
+
                 </div>
 
-                <div className="flex flex-row gap-2 items-center"> 
+                <div className="flex flex-row gap-2 items-center">
                   <div className="w-full py-8">
-                    <h3 className="text-center text-sm font-medium text-gray-500 mb-6">POWERED BY</h3>
+                    <h3 className="text-center text-sm font-medium text-gray-500 mb-6">PHÁT TRIỂN DỰA TRÊN</h3>
                     <div className="flex flex-wrap justify-center items-center gap-12">
                       <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="transition-all">
                         <Image src="/logos/vercel.png" alt="Vercel" width={100} height={24} style={{ height: '36px', width: 'auto' }} />
@@ -111,41 +100,41 @@ export default async function LandingPage() {
         </section>
 
         {/* Products Section */}
-        <ProductsSection />
+        {/* <ProductsSection /> */}
 
                 {/* How It Works */}
-                <section className="w-full py-12 bg-gradient-to-b from-purple-50 to-white">
+                <section className="w-full py-12 bg-gradient-to-b from-violet-50 to-white">
           <div className="container px-4 md:px-6">
             <div className="text-center mb-10">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
-                Super Simple to Use
+                Cực Kỳ Đơn Giản Để Sử Dụng
               </h2>
-              <p className="text-lg text-gray-600 mt-2">Just 3 easy steps to epic conversations</p>
+              <p className="text-lg text-gray-600 mt-2">Chỉ 3 bước dễ dàng để có những cuộc trò chuyện tuyệt vời</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-purple-100 transform transition-transform hover:scale-105">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-purple-600">1</span>
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-violet-100 transform transition-transform hover:scale-105">
+                <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-xl font-bold text-violet-600">1</span>
                 </div>
-                <h3 className="text-xl font-bold text-purple-900 mb-2">Attach</h3>
-                <p className="text-gray-600">Attach the Elato device to any toy or plushie</p>
+                <h3 className="text-xl font-bold text-violet-900 mb-2">Gắn</h3>
+                <p className="text-gray-600">Gắn thiết bị Aisha vào bất kỳ đồ chơi hoặc thú nhồi bông nào</p>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-purple-100 transform transition-transform hover:scale-105">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-purple-600">2</span>
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-violet-100 transform transition-transform hover:scale-105">
+                <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-xl font-bold text-violet-600">2</span>
                 </div>
-                <h3 className="text-xl font-bold text-purple-900 mb-2">Configure</h3>
-                <p className="text-gray-600">Use our <a href="/home" className="text-purple-600">web app</a> to set up your toy's personality</p>
+                <h3 className="text-xl font-bold text-violet-900 mb-2">Cấu Hình</h3>
+                <p className="text-gray-600">Sử dụng <a href="/home" className="text-violet-600">ứng dụng web</a> của chúng tôi để thiết lập tính cách cho đồ chơi của bạn</p>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-purple-100 transform transition-transform hover:scale-105">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-purple-600">3</span>
+              <div className="bg-white rounded-xl p-6 shadow-lg border border-violet-100 transform transition-transform hover:scale-105">
+                <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mb-4">
+                  <span className="text-xl font-bold text-violet-600">3</span>
                 </div>
-                <h3 className="text-xl font-bold text-purple-900 mb-2">Talk</h3>
-                <p className="text-gray-600">Start chatting with your toy - it's that simple!</p>
+                <h3 className="text-xl font-bold text-violet-900 mb-2">Nói Chuyện</h3>
+                <p className="text-gray-600">Bắt đầu trò chuyện với đồ chơi của bạn - thật đơn giản!</p>
               </div>
             </div>
           </div>
@@ -159,11 +148,12 @@ export default async function LandingPage() {
         <CreateCharacterShowcase />
 
         {/* Pricing */}
+        {/*
         <section className="w-full py-16 bg-white">
           <div className="container px-4 md:px-6">
             <div className="max-w-3xl mx-auto bg-gradient-to-r from-purple-600 to-pink-500 rounded-3xl overflow-hidden shadow-xl">
               <div className="p-8 md:p-12 text-white text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">Get Your <span className="font-silkscreen">Elato</span> Today!</h2>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Get Your <span className="font-silkscreen">Aisha</span> Today!</h2>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
                   <div className="text-5xl md:text-6xl font-bold">${DEVICE_COST}</div>
                   <div className="text-xl">
@@ -206,26 +196,29 @@ export default async function LandingPage() {
             </div>
           </div>
         </section>
+        */}
 
         {/* FAQ */}
         {/* <section className="w-full py-16 bg-purple-50">
         <FAQ className="bg-purple-50" titleClassName="text-purple-900" />
         </section> */}
-        
+
 
         {/* CTA */}
-        {/* <section className="w-full py-20 bg-gradient-to-r from-purple-600 to-pink-500 text-white">
+        {/*
+        <section className="w-full py-20 bg-gradient-to-r from-purple-600 to-pink-500 text-white">
           <div className="container px-4 md:px-6 text-center">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to Bring Your Toys to Life?</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Order your Elato device today and watch the magic happen!
+              Order your Aisha device today and watch the magic happen!
             </p>
             <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 text-lg h-14 px-8">
-              <Link href={"/products"}>Get Elato for ${DEVICE_COST}</Link>
+              <Link href={"/products"}>Get Aisha for ${DEVICE_COST}</Link>
             </Button>
             <p className="mt-4 text-purple-100">First month subscription FREE, then just ${SUBSCRIPTION_COST}/month <span className="text-xs">(or use your own OpenAI API key)</span></p>
           </div>
-        </section> */}
+        </section>
+        */}
       </main>
     </div>
   )

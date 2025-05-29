@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { SidebarNav } from "../components/Nav/SidebarNavItems";
-import { Gamepad2, Plus, PlusCircle, Settings } from "lucide-react";
+import { Gamepad2, Plus, Settings, History, StickyNote } from "lucide-react";
 import { Metadata } from "next";
 import { getOpenGraphMetadata } from "@/lib/utils";
 import { MobileNav } from "../components/Nav/MobileNav";
@@ -20,17 +20,27 @@ export const metadata: Metadata = {
 
 const sidebarNavItems: SidebarNavItem[] = [
     {
-        title: "Playground",
+        title: "Nhân vật ",
             href: "/home",
             icon: <Gamepad2 size={ICON_SIZE} />,
         },
         {
-            title: "Settings",
+            title: "Lịch sử hoạt động",
+            href: "/home/activity",
+            icon: <History size={ICON_SIZE} />,
+        },
+        {
+            title: "Ghi chú của bạn",
+            href: "/home/notes",
+            icon: <StickyNote size={ICON_SIZE} />,
+        },
+        {
+            title: "Cài Đặt",
             href: "/home/settings",
             icon: <Settings size={ICON_SIZE} />,
         },
         {
-            title: "Create new",
+            title: "Tạo Mới",
             href: "/home/create",
             icon: <Plus size={ICON_SIZE+4} strokeWidth={2.5} />,
             isPrimary: true,
@@ -60,8 +70,10 @@ export default async function RootLayout({
 
     const mobileNavItems = [
         sidebarNavItems[0], // Playground
-        sidebarNavItems[2], // Create
-        sidebarNavItems[1], // Settings
+        sidebarNavItems[1], // Activity History
+        sidebarNavItems[2], // Notes
+        sidebarNavItems[4], // Create
+        sidebarNavItems[3], // Settings
     ];
 
     return (

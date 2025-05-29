@@ -33,6 +33,18 @@ declare global {
         user_code: string;
     }
 
+    interface INote {
+        note_id: string;
+        user_id: string;
+        title: string;
+        body: string;
+        created_at: string;
+        updated_at: string;
+        image_id?: string | null;
+        color?: string;
+        is_pinned?: boolean;
+    }
+
     interface IUser {
         user_id: string;
         avatar_url: string;

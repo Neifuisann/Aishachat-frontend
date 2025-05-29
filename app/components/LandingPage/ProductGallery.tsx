@@ -14,31 +14,31 @@ import {
 const images = [
     {
         src: "/products/device1.jpeg",
-        alt: "Elato Device - white",
+        alt: "Aisha Device - white",
     },
     {
         src: "/products/device2.jpeg",
-        alt: "Elato Device - gray",
+        alt: "Aisha Device - gray",
     },
     {
         src: "/products/device4.jpeg",
-        alt: "Elato Device - white",
+        alt: "Aisha Device - white",
     },
     {
         src: "/products/device5.jpeg",
-        alt: "Elato Device - gray",
+        alt: "Aisha Device - gray",
     },
     {
         src: "/products/device6.jpeg",
-        alt: "Elato Device - black",
+        alt: "Aisha Device - black",
     },
     {
         src: "/products/device7.jpeg",
-        alt: "Elato Device - white",
+        alt: "Aisha Device - white",
     },
     {
         src: "/products/device8.jpeg",
-        alt: "Elato Device - gray",
+        alt: "Aisha Device - gray",
     },
 ];
 
@@ -54,6 +54,7 @@ export default function ProductGallery() {
                     alt={selectedImage.alt}
                     fill
                     className="object-contain rounded-2xl"
+                    sizes="(max-width: 768px) 100vw, 75vw"
                     priority
                 />
             </div>
@@ -83,6 +84,7 @@ export default function ProductGallery() {
                                         alt={image.alt}
                                         fill
                                         className="object-cover"
+                                        sizes="(max-width: 640px) 20vw, 15vw"
                                     />
                                 </div>
                             </CarouselItem>

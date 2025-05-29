@@ -13,18 +13,18 @@ export default async function Index() {
     return (
         <div className="flex w-full  max-w-xl mx-auto mt-8 flex-col lg:w-1/2 px-4  gap-2 text-left m-2">
             <p className="font-semibold text-2xl">
-                Privacy Policy for Elato AI
+                Privacy Policy for Aisha AI
             </p>
             <p className="font-light text-md">Last Updated: 2/24/25</p>
             <div className="flex flex-col gap-4 my-4">
                 <p>
-                    {`Welcome to Elato AI ("we," "us," "our"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy outlines how we handle, store, and use the information you provide us when you use our website, `}
+                    {`Welcome to Aisha AI ("we," "us," "our"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy outlines how we handle, store, and use the information you provide us when you use our website, `}
                     <a
-                        href="https://www.elatoai.com"
+                        href="https://www.Aishaai.com"
                         className="text-blue-400 underline"
                         target="_blank"
                     >
-                        https://www.elatoai.com
+                        https://www.Aishaai.com
                     </a>
                     {`, and our services.`}
                 </p>

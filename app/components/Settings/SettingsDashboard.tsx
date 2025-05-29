@@ -26,7 +26,9 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
     const supabase = createClient();
 
     const [languageState, setLanguageState] = useState<string>(
-        selectedUser.language_code! // Initial value from props
+        selectedUser.language_code && allLanguages.some(lang => lang.code === selectedUser.language_code)
+            ? selectedUser.language_code
+            : "vi-VN" // Default to Vietnamese
     );
 
 
@@ -67,7 +69,7 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
       </PopoverTrigger>
       <PopoverContent className="w-80">
         <div className="grid gap-4 text-xs">
-            The AI model will use this language as your character&apos;s default language.
+            Mô hình AI sẽ sử dụng ngôn ngữ này làm ngôn ngữ mặc định của nhân vật của bạn.
         </div>
       </PopoverContent>
     </Popover>

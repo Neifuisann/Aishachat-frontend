@@ -63,7 +63,7 @@ const DoctorForm = ({ selectedUser, heading, onSave, onClickCallback }: DoctorFo
                 {heading}
                 <section className="space-y-4">
                     <h2 className="text-lg font-semibold border-b border-gray-200 pb-2">
-                        Basic Info
+                        Thông tin cơ bản
                     </h2>
                     <FormField
                         control={form.control}
@@ -206,7 +206,7 @@ const DoctorForm = ({ selectedUser, heading, onSave, onClickCallback }: DoctorFo
                 onClick={handleSave}
                 type="submit"
             >
-                Save settings
+                Lưu thiết lập
             </Button>
             </form>
         </Form>

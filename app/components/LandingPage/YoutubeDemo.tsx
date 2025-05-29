@@ -11,11 +11,11 @@ export default function YoutubeDemo() {
 	  <iframe
 		className="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg"
 		src="https://www.youtube.com/embed/o1eIAwVll5I"
-		title="Elato Demo"
+		title="Aisha Demo"
 		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 		allowFullScreen
 	  />
 	</div>
-	<p className="text-center text-gray-600 mt-4 text-lg">Watch the Elato Demo</p>
+	<p className="text-center text-gray-600 mt-4 text-lg">Watch the Aisha Demo</p>
   </div>
 }

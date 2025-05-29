@@ -1,19 +1,19 @@
 import { Check } from "lucide-react";
 
 const includedItems = [
-    "The Elato AI Toy",
-    "USB Type-C Charging Cable",
+    "Thiết bị Aisha AI",
+    "Cáp sạc USB Type-C",
     // "Quick Start Guide",
-    "1 Month FREE Premium Subscription",
-    "2 Silicone Straps",
+    "1 Tháng trải nghiệm dùng thử miễn phí",
+    "2 Dây silicon",
 ];
 
 const technicalSpecs = [
-    "Dimensions: 4.5cm x 3.8cm x 1.9cm",
-    "Battery Life: 4+ days standby, 6 hours active use",
-    "Connectivity: Bluetooth 2.4 GHz, Wi-Fi + Hotspot",
-    "Access any AI character from Elato",
-    "Create your AI character with any voice and a bespoke personality",
+    "Kích thước: 4.5cm x 3.8cm x 1.9cm",
+    "Thời gian sử dụng pin: 4+ ngày chờ, 6 giờ sử dụng",
+    "Kết nối: Bluetooth 2.4 GHz, Wi-Fi + Hotspot",
+    "Truy cập bất kỳ nhân vật AI nào từ Aisha",
+    "Tạo nhân vật AI của bạn với bất kỳ giọng nói và tính cách riêng biệt nào",
 ];
 
 const Specs = () => {

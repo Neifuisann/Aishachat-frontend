@@ -67,7 +67,7 @@ const GeneralUserForm = ({ selectedUser, heading, onSave, onClickCallback }: Gen
                 {heading}
                 <section className="space-y-4 max-w-screen-sm">
                     <h2 className="text-lg font-semibold border-b border-gray-200 pb-2">
-                        Basic Info
+                        Thông tin cơ bản
                     </h2>
                     <div className="flex flex-col gap-6">
                         <FormField
@@ -76,13 +76,13 @@ const GeneralUserForm = ({ selectedUser, heading, onSave, onClickCallback }: Gen
                             render={({ field }) => (
                                 <FormItem className="w-full rounded-md">
                                     <FormLabel className="text-sm font-medium text-gray-700">
-                                        {"Your Name"}
+                                        {"Tên của bạn"}
                                     </FormLabel>
                                     <FormControl>
                                         <Input
                                             // autoFocus
                                             required
-                                            placeholder="e.g. John Doe"
+                                            placeholder="Ví dụ: Gia Huy"
                                             {...field}
                                             // className="max-w-screen-sm h-10 bg-white"
                                             // autoComplete="on"
@@ -102,7 +102,7 @@ const GeneralUserForm = ({ selectedUser, heading, onSave, onClickCallback }: Gen
                             render={({ field }) => (
                                 <FormItem className="w-full rounded-md">
                                     <FormLabel className="text-sm font-medium text-gray-700">
-                                        {userFormAgeLabel}
+                                        {"Tuổi của bạn"}
                                     </FormLabel>
                                     <FormDescription>
                                         {userFormAgeDescription}
@@ -130,7 +130,7 @@ const GeneralUserForm = ({ selectedUser, heading, onSave, onClickCallback }: Gen
                             render={({ field }) => (
                                 <FormItem className="w-full rounded-md">
                                     <FormLabel className="text-sm font-medium text-gray-700">
-                                        {userFormPersonaLabel}
+                                        {"Tính cách của bạn"}
                                     </FormLabel>
                                     <FormControl>
                                         <Textarea
@@ -159,7 +159,7 @@ const GeneralUserForm = ({ selectedUser, heading, onSave, onClickCallback }: Gen
                 onClick={handleSave}
                 type="submit"
             >
-                Save settings
+                Lưu thiết lập
             </Button>
             </form>
         </Form>

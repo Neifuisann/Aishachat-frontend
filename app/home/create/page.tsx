@@ -18,14 +18,39 @@ export default async function Home() {
     } = await supabase.auth.getUser();
 
     const dbUser = user ? await getUserById(supabase, user.id) : null;
-    const allLanguages = await getAllLanguages(supabase);
+    const allLanguagesFromDB = await getAllLanguages(supabase);
+
+    // Filter to only include English and Vietnamese, with Vietnamese as default
+    const filteredLanguages: ILanguage[] = [
+        {
+            language_id: "vi-VN-id",
+            code: "vi-VN",
+            name: "Tiếng Việt",
+            flag: "🇻🇳"
+        },
+        {
+            language_id: "en-US-id",
+            code: "en-US",
+            name: "English",
+            flag: "🇺🇸"
+        }
+    ];
+
+    // Set default language to Vietnamese if user doesn't have a language set
+    let userWithDefaultLanguage = dbUser;
+    if (dbUser && (!dbUser.language_code || dbUser.language_code === "")) {
+        userWithDefaultLanguage = {
+            ...dbUser,
+            language_code: "vi-VN"
+        };
+    }
 
     return (
         <div className="pb-4 flex flex-col gap-2">
-            {dbUser && (
+            {userWithDefaultLanguage && (
                 <BuildDashboard
-                    selectedUser={dbUser}
-                    allLanguages={allLanguages}
+                    selectedUser={userWithDefaultLanguage}
+                    allLanguages={filteredLanguages}
                 />
             )}
         </div>

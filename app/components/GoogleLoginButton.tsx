@@ -46,7 +46,7 @@ export default function GoogleLoginButton({
             }
         >
             <FaGoogle className="w-4 h-4 mr-4" />
-            <span>Continue with Google</span>
+            <span>Tiếp tục với Google</span>
         </Button>
     );
 }

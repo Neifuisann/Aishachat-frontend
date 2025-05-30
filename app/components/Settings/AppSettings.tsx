@@ -133,7 +133,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                               ?
                             </TooltipTrigger>
                             <TooltipContent>
-                              <p>Đơn giản hóa, bạn có thể đăng ký địa chỉ MAC của ESP32 của bạn ở đây. <br /> Tốt nhất là bạn muốn mã này là mã thân thiện cho thiết bị của bạn.</p>
+                              <p>Đơn giản hóa, bạn có thể đăng ký địa chỉ MAC của Aisha của bạn ở đây. <br /> Tốt nhất là bạn muốn mã này là mã thân thiện cho thiết bị của bạn.</p>
                             </TooltipContent>
                           </Tooltip>
                         </TooltipProvider>
@@ -150,7 +150,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                                 value={deviceCode}
                                 disabled={isConnected}
                                 onChange={(e) => setDeviceCode(e.target.value)}
-                                placeholder={isConnected ? "**********" : "Nhập địa chỉ MAC của ESP32-S3 của bạn"}
+                                placeholder={isConnected ? "**********" : "Nhập địa chỉ MAC của Aisha của bạn"}
                             />
                             <Button
                                 size="sm"
@@ -170,7 +170,7 @@ const AppSettings: React.FC<AppSettingsProps> = ({
                         <p className="text-xs text-gray-400">
                             {isConnected ? <span className="font-medium text-gray-800">Đã đăng ký thành công!</span> :
                                 error ? <span className="text-red-500">{error}.</span> :
-                                "Thêm địa chỉ MAC của ESP32-S3 của bạn (ví dụ: 12:34:56:78:9A:BC) vào tài khoản của bạn để đăng ký nó."
+                                "Thêm địa chỉ MAC của Aisha của bạn (ví dụ: 12:34:56:78:9A:BC) vào tài khoản của bạn để đăng ký nó."
                         }
                         </p>
                     </div>

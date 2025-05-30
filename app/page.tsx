@@ -1,60 +1,44 @@
 import Link from "next/link"
-import { ChevronRight, Zap, Star, Home } from "lucide-react"
+import { Eye, Users, Shield, CheckCircle, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import VideoPlayer from "./components/LandingPage/VideoPlayer"
-import { discordInviteLink, tiktokLink, videoSrc, videoSrc2, videoSrc3, videoSrc4 } from "@/lib/data";
-import { createClient } from "@/utils/supabase/server"
-import { getAllPersonalities } from "@/db/personalities"
-import { CharacterShowcase } from "./components/LandingPage/CharacterShowcase";
-import { CreateCharacterShowcase } from "./components/LandingPage/CreateCharacterShowcase";
-import { FaDiscord, FaTiktok } from "react-icons/fa";
-import ProductsSection from "./components/LandingPage/ProductsSection";
 import Image from "next/image";
 
 export default async function LandingPage() {
-  const supabase = createClient();
-  const allPersonalities = await getAllPersonalities(supabase);
-  const adultPersonalities = allPersonalities.filter((personality) => !personality.is_story && !personality.is_child_voice);
   return (
-    <div className="flex min-h-screen flex-col bg-[#FEFBFF]">
+    <div className="flex min-h-screen flex-col bg-background">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full py-12 md:py-20">
+        <section className="w-full py-16 md:py-24">
           <div className="container px-4 md:px-6 max-w-screen-lg mx-auto">
-            <div className="grid gap-6 lg:grid-cols-1 lg:gap-12 items-center">
-              <div className="flex flex-col items-center justify-center space-y-4">
-                <h1 className="text-5xl text-center md:text-6xl font-bold tracking-tight text-gray-900" style={{ lineHeight: '1.2' }}>
-
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-orange-500 to-cyan-500">
-                  AI Đối Thoại theo Thời Gian Thực
-                  </span>{" "} trên ESP32 với Arduino và Edge Functions
+            <div className="grid gap-8 lg:grid-cols-1 lg:gap-12 items-center">
+              <div className="flex flex-col items-center justify-center space-y-6">
+                <h1 className="text-4xl text-center md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground" style={{ lineHeight: '1.2' }}>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-primary">
+                    Nền tảng hỗ trợ thị giác AI
+                  </span>{" "}
+                  <span className="text-foreground">thời gian thực</span>
                 </h1>
 
-                <p className="text-xl text-gray-600 text-center max-w-[600px]">
-                  Gắn thiết bị <span className="font-silkscreen mx-1">Aisha</span> của bạn vào bất kỳ đồ chơi hoặc thú nhồi bông nào và xem chúng trở thành nhân vật AI mà bạn có thể nói chuyện cùng!
+                <p className="text-xl md:text-2xl text-muted-foreground text-center max-w-[700px] leading-relaxed">
+                  <span className="font-silkscreen mx-1 text-primary font-bold">Aisha</span> cung cấp các công cụ hỗ trợ thị giác AI chuyên nghiệp cho người khiếm thị và những người cần hỗ trợ thị giác.
                 </p>
 
-                <div className="flex flex-col gap-4  sm:gap-8 pt-4">
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <div className="flex flex-col gap-6 pt-6">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link href="/home">
                       <Button
                         size="lg"
-                        variant="outline"
-                        className="w-full sm:w-auto flex-row items-center gap-2 border-violet-600 text-violet-600 hover:bg-violet-50 text-lg h-14"
+                        className="w-full sm:w-auto flex-row items-center gap-3 text-lg h-16 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
                       >
-                        <span>Bắt đầu</span>
-                        <Home className="ml-2 h-5 w-5" />
+                        <span>Bắt đầu hỗ trợ</span>
+                        <ArrowRight className="h-5 w-5" />
                       </Button>
                     </Link>
                   </div>
 
-                  <div className="flex items-center space-x-2 justify-center text-amber-500 mb-4">
-                    <Star className="fill-amber-500" />
-                    <Star className="fill-amber-500" />
-                    <Star className="fill-amber-500" />
-                    <Star className="fill-amber-500" />
-                    <Star className="fill-amber-500" />
-                    <span className="ml-2 text-gray-700">2+ đánh giá tích cực</span>
+                  <div className="flex items-center space-x-2 justify-center text-accent mb-4">
+                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <span className="text-foreground font-medium">Với các đánh giá tích cực từ người dùng</span>
                   </div>
                   {/* <div className="flex items-center space-x-3">
                       <Link href="https://discord.gg/your-discord" target="_blank" rel="noopener noreferrer"
@@ -70,26 +54,20 @@ export default async function LandingPage() {
                 </div>
 
                 <div className="flex flex-row gap-2 items-center">
-                  <div className="w-full py-8">
-                    <h3 className="text-center text-sm font-medium text-gray-500 mb-6">PHÁT TRIỂN DỰA TRÊN</h3>
+                  <div className="w-full py-12">
+                    <h3 className="text-center text-sm font-medium text-muted-foreground mb-8">CÔNG NGHỆ ĐÁNG TIN CẬY</h3>
                     <div className="flex flex-wrap justify-center items-center gap-12">
-                      <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="transition-all">
-                        <Image src="/logos/vercel.png" alt="Vercel" width={100} height={24} style={{ height: '36px', width: 'auto' }} />
+                      <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="transition-all opacity-70 hover:opacity-100">
+                        <Image src="/logos/vercel.png" alt="Vercel - Nền tảng triển khai" width={100} height={24} style={{ height: '36px', width: 'auto' }} />
                       </a>
-                      <a href="https://deno.com" target="_blank" rel="noopener noreferrer" className="transition-all">
-                        <Image src="/logos/deno.png" alt="Deno" width={100} height={24} style={{ height: '36px', width: 'auto' }} />
+                      <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="transition-all opacity-70 hover:opacity-100">
+                        <Image src="/logos/supabase.png" alt="Supabase - Cơ sở dữ liệu bảo mật" width={100} height={24} style={{ height: '48px', width: 'auto' }} />
                       </a>
-                      <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="transition-all">
-                        <Image src="/logos/supabase.png" alt="Supabase" width={100} height={24} style={{ height: '48px', width: 'auto' }} />
+                      <a href="https://arduino.cc" target="_blank" rel="noopener noreferrer" className="transition-all opacity-70 hover:opacity-100">
+                        <Image src="/logos/arduino.png" alt="Arduino - Phần cứng mở" width={100} height={24} style={{ height: '36px', width: 'auto' }} />
                       </a>
-                      <a href="https://arduino.cc" target="_blank" rel="noopener noreferrer" className="transition-all">
-                        <Image src="/logos/arduino.png" alt="Arduino" width={100} height={24} style={{ height: '36px', width: 'auto' }} />
-                      </a>
-                      <a href="https://espressif.com" target="_blank" rel="noopener noreferrer" className="transition-all">
-                        <Image src="/logos/espressif.png" alt="Espressif ESP32" width={100} height={24} style={{ height: '24px', width: 'auto' }} />
-                      </a>
-                      <a href="https://platformio.org" target="_blank" rel="noopener noreferrer" className="transition-all">
-                        <Image src="/logos/platformio.png" alt="PlatformIO" width={100} height={24} style={{ height: '36px', width: 'auto' }} />
+                      <a href="https://espressif.com" target="_blank" rel="noopener noreferrer" className="transition-all opacity-70 hover:opacity-100">
+                        <Image src="/logos/espressif.png" alt="Espressif ESP32 - Vi xử lý" width={100} height={24} style={{ height: '24px', width: 'auto' }} />
                       </a>
                     </div>
                   </div>
@@ -103,49 +81,81 @@ export default async function LandingPage() {
         {/* <ProductsSection /> */}
 
                 {/* How It Works */}
-                <section className="w-full py-12 bg-gradient-to-b from-violet-50 to-white">
+                <section className="w-full py-16 bg-secondary">
           <div className="container px-4 md:px-6">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
-                Cực Kỳ Đơn Giản Để Sử Dụng
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+                Dễ dàng tiếp cận và sử dụng
               </h2>
-              <p className="text-lg text-gray-600 mt-2">Chỉ 3 bước dễ dàng để có những cuộc trò chuyện tuyệt vời</p>
+              <p className="text-lg text-muted-foreground mt-2">3 bước đơn giản để bắt đầu hỗ trợ thị giác</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-violet-100 transform transition-transform hover:scale-105">
-                <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-violet-600">1</span>
+              <div className="bg-card rounded-xl p-8 shadow-lg border border-border transform transition-transform hover:scale-105">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                  <span className="text-2xl font-bold text-primary-foreground">1</span>
                 </div>
-                <h3 className="text-xl font-bold text-violet-900 mb-2">Gắn</h3>
-                <p className="text-gray-600">Gắn thiết bị Aisha vào bất kỳ đồ chơi hoặc thú nhồi bông nào</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">Kết nối thiết bị</h3>
+                <p className="text-muted-foreground leading-relaxed">Khởi động và kết nối thiết bị Aisha với mạng internet</p>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-violet-100 transform transition-transform hover:scale-105">
-                <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-violet-600">2</span>
+              <div className="bg-card rounded-xl p-8 shadow-lg border border-border transform transition-transform hover:scale-105">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                  <span className="text-2xl font-bold text-primary-foreground">2</span>
                 </div>
-                <h3 className="text-xl font-bold text-violet-900 mb-2">Cấu Hình</h3>
-                <p className="text-gray-600">Sử dụng <a href="/home" className="text-violet-600">ứng dụng web</a> của chúng tôi để thiết lập tính cách cho đồ chơi của bạn</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">Cấu hình hỗ trợ</h3>
+                <p className="text-muted-foreground leading-relaxed">Sử dụng <a href="/home" className="text-primary font-medium hover:underline">nền tảng web</a> để thiết lập các chế độ hỗ trợ phù hợp</p>
               </div>
 
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-violet-100 transform transition-transform hover:scale-105">
-                <div className="w-12 h-12 bg-violet-100 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-xl font-bold text-violet-600">3</span>
+              <div className="bg-card rounded-xl p-8 shadow-lg border border-border transform transition-transform hover:scale-105">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6">
+                  <span className="text-2xl font-bold text-primary-foreground">3</span>
                 </div>
-                <h3 className="text-xl font-bold text-violet-900 mb-2">Nói Chuyện</h3>
-                <p className="text-gray-600">Bắt đầu trò chuyện với đồ chơi của bạn - thật đơn giản!</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">Nhận hỗ trợ</h3>
+                <p className="text-muted-foreground leading-relaxed">Bắt đầu sử dụng các tính năng hỗ trợ thị giác AI - an toàn và hiệu quả!</p>
               </div>
             </div>
           </div>
         </section>
 
 
-        {/* Character Showcase */}
-        <CharacterShowcase allPersonalities={adultPersonalities} />
+        {/* Features Section */}
+        <section className="w-full py-16 bg-background">
+          <div className="container px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
+                Tính năng hỗ trợ thị giác toàn diện
+              </h2>
+              <p className="text-lg text-muted-foreground mt-2">Các công cụ AI chuyên nghiệp được thiết kế cho người khiếm thị</p>
+            </div>
 
-        {/* Create Character Showcase */}
-        <CreateCharacterShowcase />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                  <Eye className="h-6 w-6 text-accent-foreground" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">Nhận dạng đối tượng</h3>
+                <p className="text-muted-foreground">AI mô tả chi tiết các đối tượng, người và môi trường xung quanh bạn</p>
+              </div>
+
+              <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                  <Users className="h-6 w-6 text-accent-foreground" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">Hỗ trợ điều hướng</h3>
+                <p className="text-muted-foreground">Hướng dẫn di chuyển an toàn và hiệu quả trong không gian</p>
+              </div>
+
+              <div className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center mb-4">
+                  <Shield className="h-6 w-6 text-accent-foreground" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">Bảo mật và riêng tư</h3>
+                <p className="text-muted-foreground">Dữ liệu được bảo vệ với tiêu chuẩn bảo mật cao nhất</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Pricing */}
         {/*

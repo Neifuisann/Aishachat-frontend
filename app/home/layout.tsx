@@ -20,17 +20,17 @@ export const metadata: Metadata = {
 
 const sidebarNavItems: SidebarNavItem[] = [
     {
-        title: "Nhân vật ",
+        title: "Chế độ",
             href: "/home",
             icon: <Gamepad2 size={ICON_SIZE} />,
         },
         {
-            title: "Lịch sử hoạt động",
+            title: "Lịch sử",
             href: "/home/activity",
             icon: <History size={ICON_SIZE} />,
         },
         {
-            title: "Ghi chú của bạn",
+            title: "Ghi chú",
             href: "/home/notes",
             icon: <StickyNote size={ICON_SIZE} />,
         },
@@ -40,7 +40,7 @@ const sidebarNavItems: SidebarNavItem[] = [
             icon: <Settings size={ICON_SIZE} />,
         },
         {
-            title: "Tạo Mới",
+            title: "Cấu hình",
             href: "/home/create",
             icon: <Plus size={ICON_SIZE+4} strokeWidth={2.5} />,
             isPrimary: true,
@@ -69,10 +69,10 @@ export default async function RootLayout({
     }
 
     const mobileNavItems = [
-        sidebarNavItems[0], // Playground
-        sidebarNavItems[1], // Activity History
-        sidebarNavItems[2], // Notes
-        sidebarNavItems[4], // Create
+        sidebarNavItems[0], // Assistance Modes
+        sidebarNavItems[1], // Assistance History
+        sidebarNavItems[2], // Assistance Notes
+        sidebarNavItems[4], // Configure Assistance
         sidebarNavItems[3], // Settings
     ];
 

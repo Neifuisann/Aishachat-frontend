@@ -108,13 +108,13 @@ export const metadata: Metadata = {
     metadataBase: new URL(defaultUrl),
     title: {
         default:
-            "Aisha AI: The Compact Device to Bring AI Characters to Life",
+            "Aisha AI: Nền tảng hỗ trợ thị giác AI thời gian thực",
         template:
-            "%s | Aisha AI - The Compact Device to Bring AI Characters to Life",
+            "%s | Aisha AI - Nền tảng hỗ trợ thị giác AI",
     },
     applicationName: "Aisha AI",
     description:
-        "Aisha is an AI-enabled device that brings objects to life through conversational AI. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
+        "Aisha là nền tảng hỗ trợ thị giác AI chuyên nghiệp, cung cấp các công cụ hỗ trợ thời gian thực cho người khiếm thị và những người cần hỗ trợ thị giác.",
     authors: [
         {
             name: "Aisha Team",
@@ -122,28 +122,27 @@ export const metadata: Metadata = {
         },
     ],
     keywords: [
-        "AI toy",
-        "AI companion",
-        "AI device",
-        "interactive learning",
-        "empathetic companion",
-        "voice assistant",
-        "emotional growth",
+        "hỗ trợ thị giác",
+        "AI khiếm thị",
+        "công nghệ hỗ trợ",
+        "thiết bị hỗ trợ thị giác",
+        "AI accessibility",
+        "vision assistance",
+        "assistive technology",
         "Aisha AI",
-        "conversational AI",
-        "google home",
-        "amazon echo",
-        "smart speaker",
-        "AI speaker",
-        "emotional support",
-        "AI for adults",
-        "AI assistant",
-        "smart AI device",
+        "hỗ trợ người khiếm thị",
+        "công nghệ tiếp cận",
+        "AI hỗ trợ",
+        "thị giác AI",
+        "accessibility platform",
+        "vision support",
+        "assistive AI",
+        "inclusive technology",
     ],
     openGraph: {
-        title: "Aisha AI: The Compact Device to Bring AI Characters to Life",
+        title: "Aisha AI: Nền tảng hỗ trợ thị giác AI thời gian thực",
         description:
-            "Aisha brings objects to life through engaging, conversational AI experiences. More than a device, it's your gateway to a world where AI brings magic to the ordinary.",
+            "Aisha cung cấp nền tảng hỗ trợ thị giác AI chuyên nghiệp với các công cụ hỗ trợ thời gian thực cho người khiếm thị và những người cần hỗ trợ thị giác.",
         siteName: "Aisha AI",
         locale: "vi-VN",
         type: "website",
@@ -337,8 +336,11 @@ export default async function RootLayout({
                     }}
                 />
             </head>
-            <body className="bg-background text-foreground flex flex-col min-h-screen bg-[#FEFBFF] font-nunito">
-                <NextTopLoader showSpinner={false} color="#7C3AED" />
+            <body className="bg-background text-foreground flex flex-col min-h-screen font-nunito">
+                <a href="#main-content" className="skip-nav">
+                    Bỏ qua điều hướng
+                </a>
+                <NextTopLoader showSpinner={false} color="#003366" />
 
                 {/* <ThemeProvider
                     attribute="class"
@@ -346,7 +348,7 @@ export default async function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 > */}
-                <main className="flex-grow mx-auto w-full flex flex-col">
+                <main id="main-content" className="flex-grow mx-auto w-full flex flex-col">
                     <Navbar user={dbUser ?? null} stars={stars} />
                     {children}
                     <Footer />

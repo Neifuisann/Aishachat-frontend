@@ -6,9 +6,6 @@ import { updateUser } from "@/db/users";
 import _ from "lodash";
 import HomePageSubtitles from "../HomePageSubtitles";
 import PersonalityFilters from "./PersonalityFilters";
-import { TranscriptProvider } from "../Realtime/contexts/TranscriptContext";
-import { EventProvider } from "../Realtime/contexts/EventContext";
-import App from "../Realtime/App";
 import { defaultPersonalityId } from "@/lib/data";
 import UserPersonalities from "./UserPersonalities";
 
@@ -51,16 +48,9 @@ const Playground: React.FC<PlaygroundProps> = ({
             <div className="flex flex-col w-full gap-2">
                 <div className="flex flex-row items-center gap-4 sm:gap-8 justify-between">
                     <div className="flex flex-row items-center gap-4 sm:gap-8">
-                        <h1 className="text-3xl font-normal">
-                            {"các nhân vật "}
+                        <h1 className="text-3xl font-bold text-foreground">
+                            {"Chế độ hỗ trợ thị giác"}
                         </h1>
-                        <div className="flex flex-col gap-8 items-center justify-center">
-                        <TranscriptProvider>
-      <EventProvider>
-        <App personalityIdState={personalityIdState} isDoctor={isDoctor} userId={currentUser.user_id} />
-      </EventProvider>
-    </TranscriptProvider>
-                        </div>
                     </div>
                 </div>
 
@@ -82,9 +72,9 @@ const Playground: React.FC<PlaygroundProps> = ({
                             personalityIdState={personalityIdState}
                             languageState={'vi-VN'}
                             disableButtons={false}
-                            allPersonalities={isDoctor 
+                            allPersonalities={isDoctor
                                 ? allPersonalities.filter(p => p.is_story || p.is_doctor)
-                                : allPersonalities}                            
+                                : allPersonalities}
                             myPersonalities={myPersonalities}
                         />
                     </div>

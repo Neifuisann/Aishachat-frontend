@@ -12,27 +12,27 @@ const HomePageSubtitles: React.FC<HomePageSubtitlesProps> = ({
     if (page === "home") {
         if (user.user_info.user_type === "doctor") {
             return (
-                <p className="text-sm text-gray-600">
-                    {"Sử dụng các nhân vật hoặc thiết bị của bạn để tương tác với bệnh nhân"}
+                <p className="text-lg text-muted-foreground">
+                    {"Sử dụng các chế độ hỗ trợ chuyên nghiệp để hỗ trợ bệnh nhân khiếm thị"}
                 </p>
             );
         } else {
             return (
-                <p className="text-sm text-gray-600">
-                    {"Nói chuyện với bất kỳ nhân vật AI nào dưới đây"}
+                <p className="text-lg text-muted-foreground">
+                    {"Chọn chế độ hỗ trợ thị giác phù hợp với nhu cầu của bạn"}
                 </p>
             );
         }
     } else if (page === "settings") {
         return (
-            <p className="text-sm text-gray-600">
-                {"Bạn có thể cập nhật các cài đặt của bạn dưới đây"}
+            <p className="text-lg text-muted-foreground">
+                {"Cấu hình các tùy chọn hỗ trợ và thiết bị của bạn"}
             </p>
         );
     } else if (page === "create") {
         return (
-            <p className="text-sm text-gray-600">
-                {"Tùy chỉnh giọng nói, ngôn ngữ, phong cách và nhiều hơn nữa của nhân vật của bạn"}
+            <p className="text-lg text-muted-foreground">
+                {"Tùy chỉnh các chế độ hỗ trợ thị giác theo nhu cầu cá nhân của bạn"}
             </p>
         );
     }

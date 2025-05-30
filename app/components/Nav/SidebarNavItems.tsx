@@ -20,8 +20,8 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
         href={item.href}
         className={cn(
             buttonVariants({ variant: "default" }),
-            pathname === item.href ? "bg-muted shadow-xl" : "",
-            "w-fit justify-start rounded-full text-sm sm:text-xl text-normal text-white bg-yellow-500 hover:bg-yellow-400"
+            pathname === item.href ? "bg-accent shadow-xl" : "",
+            "w-fit justify-start rounded-lg text-sm sm:text-xl text-normal text-accent-foreground bg-accent hover:bg-accent/90 font-semibold"
         )}
     >
         <span className="mr-2">{item.icon}</span>
@@ -48,7 +48,7 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
                         className={cn(
                             buttonVariants({ variant: "ghost" }),
                             pathname === item.href ? "bg-muted" : "",
-                            "justify-start rounded-full text-sm sm:text-xl text-normal text-stone-700"
+                            "justify-start rounded-lg text-sm sm:text-xl text-normal text-foreground hover:bg-muted font-medium"
                         )}
                     >
                         <span className="mr-2">{item.icon}</span>

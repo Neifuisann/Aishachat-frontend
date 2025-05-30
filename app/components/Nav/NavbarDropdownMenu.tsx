@@ -62,7 +62,7 @@ export function NavbarDropdownMenu({ user, stars }: NavbarMenuButtonProps) {
                     className="flex flex-row gap-2 w-full"
                 >
                     <HomeIcon size={ICON_SIZE} />
-                    <span>Trang chủ</span>
+                    <span>Chế độ hỗ trợ</span>
                 </Link>
             </DropdownMenuItem>
         );
@@ -97,13 +97,13 @@ export function NavbarDropdownMenu({ user, stars }: NavbarMenuButtonProps) {
                 <Button
                     variant="ghost"
                     size="sm"
-                    className="flex flex-row gap-2 items-center rounded-full 
-                    focus:outline-none focus:ring-0 focus:ring-transparent 
-                    focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent 
+                    className="flex flex-row gap-2 items-center rounded-full
+                    focus:outline-none focus:ring-0 focus:ring-transparent
+                    focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent
                     shadow-none focus:shadow-none focus-visible:shadow-none"                    >
                     <Menu size={20} />
                     <span className="hidden sm:flex font-normal">
-                        {user ? "Trang chủ" : "Đăng nhập"}
+                        {user ? "Hỗ trợ" : "Đăng nhập"}
                     </span>
                 </Button>
             </DropdownMenuTrigger>

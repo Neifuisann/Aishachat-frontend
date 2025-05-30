@@ -103,6 +103,19 @@ const config = {
                 tron: "0 4px 6px rgba(255, 215, 0, 0.2), 0 8px 24px rgba(218, 165, 32, 0.5)",
                 custom_focus: "0 0 20px rgba(0, 0, 0, 0.25)", // Custom shadow
                 custom_unfocus: "0 0 8px rgba(0, 0, 0, 0.07)", // Custom shadow
+                accessibility: "0 0 0 4px rgba(0, 102, 204, 0.5)", // High contrast focus
+            },
+            fontSize: {
+                'xs': ['14px', { lineHeight: '1.6' }],
+                'sm': ['16px', { lineHeight: '1.6' }],
+                'base': ['18px', { lineHeight: '1.6' }],
+                'lg': ['20px', { lineHeight: '1.6' }],
+                'xl': ['24px', { lineHeight: '1.5' }],
+                '2xl': ['30px', { lineHeight: '1.4' }],
+                '3xl': ['36px', { lineHeight: '1.3' }],
+                '4xl': ['48px', { lineHeight: '1.2' }],
+                '5xl': ['60px', { lineHeight: '1.1' }],
+                '6xl': ['72px', { lineHeight: '1.1' }],
             },
         },
     },

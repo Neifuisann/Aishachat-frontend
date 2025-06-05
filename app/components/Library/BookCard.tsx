@@ -55,9 +55,9 @@ export default function BookCard({ book, readingHistory, onSelect }: BookCardPro
                     <div className="flex items-center gap-2 flex-shrink-0">
                         <span className="text-2xl">{getFileTypeIcon(book.fileType)}</span>
                         {book.isPublic ? (
-                            <Globe size={16} className="text-green-500" title="Công khai" />
+                            <Globe size={16} className="text-green-500" />
                         ) : (
-                            <Lock size={16} className="text-gray-500" title="Riêng tư" />
+                            <Lock size={16} className="text-gray-500" />
                         )}
                     </div>
                 </div>

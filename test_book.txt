@@ -1,0 +1,35 @@
+Đây là một cuốn sách thử nghiệm
+
+Chương 1: Giới thiệu
+
+Đây là nội dung của chương đầu tiên. Chúng ta sẽ tìm hiểu về hệ thống thư viện mới này.
+
+Hệ thống thư viện cho phép người dùng:
+- Tải lên sách của riêng mình
+- Đọc sách với nhiều chế độ khác nhau
+- Theo dõi tiến độ đọc
+- Tìm kiếm trong nội dung sách
+
+Chương 2: Cách sử dụng
+
+Để sử dụng hệ thống thư viện, bạn cần:
+
+1. Đăng nhập vào tài khoản
+2. Chọn "Thư viện" từ menu bên trái
+3. Nhấn "Tải sách lên" để thêm sách mới
+4. Chọn sách để bắt đầu đọc
+
+Chương 3: Tính năng nâng cao
+
+Hệ thống cung cấp nhiều tính năng nâng cao:
+
+- Tìm kiếm từ khóa trong sách
+- Đánh dấu trang đã đọc
+- Cài đặt chế độ đọc theo ý thích
+- Quản lý thư viện cá nhân và công khai
+
+Chương 4: Kết luận
+
+Hệ thống thư viện này được thiết kế để mang lại trải nghiệm đọc sách tốt nhất cho người dùng. Với giao diện thân thiện và nhiều tính năng hữu ích, việc đọc sách trở nên dễ dàng và thú vị hơn bao giờ hết.
+
+Cảm ơn bạn đã sử dụng hệ thống thư viện của chúng tôi!

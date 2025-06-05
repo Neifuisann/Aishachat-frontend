@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { SidebarNav } from "../components/Nav/SidebarNavItems";
-import { Gamepad2, Plus, Settings, History, StickyNote } from "lucide-react";
+import { Gamepad2, Plus, Settings, History, StickyNote, BookOpen, Calendar } from "lucide-react";
 import { Metadata } from "next";
 import { getOpenGraphMetadata } from "@/lib/utils";
 import { MobileNav } from "../components/Nav/MobileNav";
@@ -33,6 +33,16 @@ const sidebarNavItems: SidebarNavItem[] = [
             title: "Ghi chú",
             href: "/home/notes",
             icon: <StickyNote size={ICON_SIZE} />,
+        },
+        {
+            title: "Lịch trình",
+            href: "/home/schedule",
+            icon: <Calendar size={ICON_SIZE} />,
+        },
+        {
+            title: "Thư viện",
+            href: "/home/library",
+            icon: <BookOpen size={ICON_SIZE} />,
         },
         {
             title: "Cài Đặt",
@@ -72,8 +82,10 @@ export default async function RootLayout({
         sidebarNavItems[0], // Assistance Modes
         sidebarNavItems[1], // Assistance History
         sidebarNavItems[2], // Assistance Notes
-        sidebarNavItems[4], // Configure Assistance
-        sidebarNavItems[3], // Settings
+        sidebarNavItems[3], // Schedule
+        sidebarNavItems[4], // Library
+        sidebarNavItems[6], // Configure Assistance
+        sidebarNavItems[5], // Settings
     ];
 
     return (

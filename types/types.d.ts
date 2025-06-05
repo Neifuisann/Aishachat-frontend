@@ -45,6 +45,84 @@ declare global {
         is_pinned?: boolean;
     }
 
+    interface ISchedulePattern {
+        weekdays?: number[]; // 0-6, Sunday = 0
+        skip_days?: number; // For custom patterns
+        specific_dates?: string[]; // YYYY-MM-DD format
+        end_date?: string; // YYYY-MM-DD format
+    }
+
+    interface ISchedule {
+        schedule_id: string;
+        user_id: string;
+        title: string;
+        description?: string | null;
+        scheduled_time: string; // HH:MM format
+        schedule_type: 'once' | 'daily' | 'weekly' | 'custom';
+        schedule_pattern?: ISchedulePattern | null;
+        target_date?: string | null; // YYYY-MM-DD format for one-time schedules
+        is_active: boolean;
+        created_at: string;
+        updated_at: string;
+    }
+
+    interface IScheduleWithCurrentTime extends ISchedule {
+        current_time?: string; // Current UTC+7 time for display
+        current_date?: string; // Current UTC+7 date
+        time_until?: string; // Human readable time until next occurrence
+        status?: 'upcoming' | 'passed' | 'today';
+    }
+
+    interface IBook {
+        book_id: string;
+        book_name: string;
+        file_path: string;
+        total_pages: number;
+        is_public: boolean;
+        author?: string | null;
+        description?: string | null;
+        created_at: string;
+        file_size?: number;
+        file_type?: string;
+        uploaded_by?: string;
+    }
+
+    interface IReadingHistory {
+        history_id: string;
+        user_id: string;
+        book_name: string;
+        current_page: number;
+        total_pages: number;
+        last_read_at: string;
+        created_at: string;
+        reading_progress?: number; // calculated field
+    }
+
+    interface IReadingSettings {
+        settings_id: string;
+        user_id: string;
+        reading_mode: 'paragraphs' | 'sentences' | 'fullpage';
+        reading_amount: number;
+        created_at: string;
+        updated_at: string;
+    }
+
+    interface BookUploadData {
+        title: string;
+        author?: string;
+        description?: string;
+        file: File;
+        is_public?: boolean;
+    }
+
+    interface ReadingContent {
+        content: string;
+        currentPage: number;
+        totalPages: number;
+        hasNext: boolean;
+        hasPrevious: boolean;
+    }
+
     interface IUser {
         user_id: string;
         avatar_url: string;

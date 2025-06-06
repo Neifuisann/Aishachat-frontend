@@ -10,6 +10,13 @@ export const getOpenGraphMetadata = (title: string) => {
     };
 };
 
+export const PitchFactors = [
+    { emoji: "🧟‍♂️", label: "Siêu trầm", desc: "Hulk" },
+    { emoji: "👤", label: "Bình thường", desc: "Giọng nói bình thường" },
+    { emoji: "👧", label: "Cao hơn", desc: "Giọng trẻ em" },
+    { emoji: "🐿️", label: "Siêu cao", desc: "Nhân vật hoạt hình" },
+];
+
 // code in the form: aabbccddeeff
 export const isValidMacAddress = (macAddress: string): boolean => {
     // Check if macAddress is a valid MAC address with colon separators

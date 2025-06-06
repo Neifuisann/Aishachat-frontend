@@ -206,6 +206,7 @@ declare global {
         character_prompt: string;
         voice_prompt: string;
         creator_id: string | null;
+        pitch_factor: number;
     }
 
     type PersonalityFilter = "is_child_voice" | "is_doctor" | "is_story";

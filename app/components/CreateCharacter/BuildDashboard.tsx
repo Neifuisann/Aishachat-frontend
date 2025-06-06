@@ -17,6 +17,8 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { emotionOptions, r2UrlAudio, voices } from "@/lib/data";
 import EmojiComponent from "./EmojiComponent";
+import { PitchFactors } from "@/lib/utils";
+import { Slider } from "@/components/ui/slider";
 
 interface SettingsDashboardProps {
     selectedUser: IUser;
@@ -30,7 +32,8 @@ const formSchema = z.object({
   voice: z.string().min(1, "Yêu cầu chọn giọng nói"),
   voiceCharacteristics: z.object({
     features: z.string().min(10, "Tối thiểu 10 kí tự").max(5000, "Tối đa 5000 kí tự"),
-    emotion: z.string()
+    emotion: z.string(),
+    pitchFactor: z.number().min(0.75).max(1.5),
   })
 });
 
@@ -59,7 +62,8 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
         voice: '',
         voiceCharacteristics: {
           features: '',
-          emotion: 'neutral'
+          emotion: 'neutral',
+          pitchFactor: 1.0,
         }
       });
 
@@ -112,24 +116,27 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
         }
       };
 
-    const handleVoiceCharacteristicChange = (characteristic: 'features' | 'emotion', value: string) => {
-      const newVoiceCharacteristics = {
-        ...formData.voiceCharacteristics,
-        [characteristic]: value
-      };
-
-      // Validate just this nested field
-      try {
-        formSchema.shape.voiceCharacteristics.shape[characteristic].parse(value);
-        // Clear error if validation passes
-        setFormErrors(prev => ({ ...prev, [characteristic]: undefined }));
-      } catch (error: unknown) {
-        if (error instanceof z.ZodError) {
-          // Type assertion is needed here
-          const zodError = error as z.ZodError;
-          setFormErrors(prev => ({ ...prev, [characteristic]: zodError.errors[0].message }));
+      const handleVoiceCharacteristicChange = (characteristic: 'features' | 'emotion' | 'pitchFactor', value: string | number) => {
+        const newVoiceCharacteristics = {
+          ...formData.voiceCharacteristics,
+          [characteristic]: characteristic === 'pitchFactor' ? Number(value) : value
+        };
+        
+        // Validate just this nested field
+        try {
+          if (characteristic === 'pitchFactor') {
+            formSchema.shape.voiceCharacteristics.shape.pitchFactor.parse(newVoiceCharacteristics[characteristic]);
+          } else {
+            formSchema.shape.voiceCharacteristics.shape[characteristic].parse(newVoiceCharacteristics[characteristic]);
+          }
+          // Clear error if validation passes
+          setFormErrors(prev => ({ ...prev, [characteristic]: undefined }));
+        } catch (error: unknown) {
+          if (error instanceof z.ZodError) {
+            const zodError = error as z.ZodError;
+            setFormErrors(prev => ({ ...prev, [characteristic]: zodError.errors[0].message }));
+          }
         }
-      }
 
       setFormData({
         ...formData,
@@ -176,8 +183,9 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
         is_story: false,
         key: formData.title.toLowerCase().replace(/ /g, '_') + "_" + uuidv4(),
         creator_id: selectedUser.user_id,
-        short_description: formData.description
-      });
+        short_description: formData.description,
+        pitch_factor: formData.voiceCharacteristics.pitchFactor
+      }); 
 
       if (personality) {
         toast({
@@ -315,7 +323,7 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
             <div className="space-y-2">
               <Label htmlFor="voice">Chọn giọng nói</Label>
               <p className="text-sm text-gray-500">
-                Nhấn vào giọng nói để nghe thử. Chọn một giọng nói cho nhân vật của bạn.
+                Nhấn vào giọng nói để nghe thử.
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {voices.map((voice) => (
@@ -356,11 +364,44 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
                 ))}
               </div>
             </div>
+            {/* Pitch Slider */}
+            <div className="flex flex-col gap-4 -pt-6 pb-4">
+                <Label htmlFor="pitchFactor">Độ cao giọng nói</Label>
+                <p className="text-sm text-gray-500">
+                  Kéo để điều chỉnh độ sâu giọng nói trên thiết bị của bạn
+                </p>
+
+                <div className="space-y-6">
+                  <Slider
+                    id="pitchFactor"
+                    min={0.75}
+                    max={1.5}
+                    step={0.25}
+                    value={[formData.voiceCharacteristics.pitchFactor]}
+                    onValueChange={(value: number[]) => {
+                      handleVoiceCharacteristicChange('pitchFactor', value[0]);
+                    }}
+                    className="w-full"
+                  />
+
+                  <div className="flex justify-between text-sm">
+                    {PitchFactors.map((item, idx) => (
+                      <div key={idx} className="flex flex-col items-center gap-1">
+                       <EmojiComponent emoji={item.emoji} />
+                        <span className="font-medium">{item.label}</span>
+                        <span className="text-xs hidden sm:block text-gray-500">{item.desc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            {/* Voice Characteristics Textarea */}
             <div className="space-y-2">
-                  <Label htmlFor="voiceCharacteristics">Đặc điểm giọng nói</Label>
+                  <Label htmlFor="voiceCharacteristics">Đặc điểm</Label>
                   <Textarea
   id="voiceCharacteristics"
-  placeholder="Ví dụ: Độ cao giọng, Tốc độ giọng, Giọng rõ ràng"
+  placeholder="Ví dụ: Độ cao giọng trung bình, Tốc độ bình thường, Giọng rõ ràng"
   className="w-full min-h-16"
   rows={2}
   value={formData.voiceCharacteristics.features}
@@ -387,29 +428,32 @@ const SettingsDashboard: React.FC<SettingsDashboardProps> = ({
     <span className="text-gray-500">{formData.voiceCharacteristics.features.length}/5000</span>
   </p>
             </div>
-                <div className="space-y-3">
-                  <Label className="block mb-2">Cảm xúc giọng nói</Label>
-                  <div className="grid grid-cols-3 gap-3">
-                    {emotionOptions.map((emotion) => (
-                      <div
-                        key={emotion.value}
-                        className={`
-                          rounded-lg border p-3 cursor-pointer transition-all
-                          ${formData.voiceCharacteristics.emotion === emotion.value
-                            ? 'border-2 border-blue-500 shadow-sm ' + emotion.color
-                            : 'border-gray-200 hover:border-gray-300'
-                          }
-                        `}
-                        onClick={() => handleVoiceCharacteristicChange('emotion', emotion.value)}
-                      >
-                        <div className="flex flex-col items-center text-center">
-                          <EmojiComponent emoji={emotion.icon} />
-                          <span className="text-sm font-medium">{emotion.label}</span>
-                        </div>
-                      </div>
-                    ))}
+            {/* Emotional Tone Picker */}
+            <div className="space-y-4 pb-2">
+              <Label className="block mb-2">Cảm xúc giọng nói</Label>
+              <div className="grid grid-cols-3 gap-3">
+                {emotionOptions.map((emotion) => (
+                  <div
+                    key={emotion.value}
+                    className={`
+                      rounded-lg border p-3 cursor-pointer transition-all
+                      ${formData.voiceCharacteristics.emotion === emotion.value
+                        ? 'border-2 border-blue-500 shadow-sm ' + emotion.color
+                        : 'border-gray-200 hover:border-gray-300'
+                      }
+                    `}
+                    onClick={() =>
+                      handleVoiceCharacteristicChange('emotion', emotion.value)
+                    }
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <EmojiComponent emoji={emotion.icon} />
+                      <span className="text-sm font-medium">{emotion.label}</span>
+                    </div>
                   </div>
-                </div>
+                ))}
+              </div>
+            </div>
             </div>}
 
 

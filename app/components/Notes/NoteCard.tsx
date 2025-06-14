@@ -47,6 +47,7 @@ export default function NoteCard({
 }: NoteCardProps) {
     const [imageData, setImageData] = useState<ProcessedImage | null>(null);
     const [imageLoading, setImageLoading] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
 
     const supabase = createClient();
 
@@ -105,6 +106,11 @@ export default function NoteCard({
         }
     };
 
+    const handleDeleteClick = () => {
+        setDropdownOpen(false); // Close dropdown first
+        onDelete(); // Then trigger delete
+    };
+
     return (
         <Card
             className={`cursor-pointer hover:shadow-md transition-shadow duration-200 ${colorClass} relative group`}
@@ -119,7 +125,7 @@ export default function NoteCard({
 
             {/* Dropdown menu */}
             <div className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity" data-dropdown>
-                <DropdownMenu>
+                <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                             <MoreVertical className="h-4 w-4" />
@@ -144,7 +150,10 @@ export default function NoteCard({
                             )}
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                            onClick={(e) => { e.stopPropagation(); onDelete(); }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteClick();
+                            }}
                             className="text-red-600"
                         >
                             <Trash2 className="h-4 w-4 mr-2" />

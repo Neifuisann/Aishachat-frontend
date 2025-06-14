@@ -34,6 +34,7 @@ export default function NotesTab({ currentUser }: NotesTabProps) {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [noteToDelete, setNoteToDelete] = useState<INote | null>(null);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const supabase = createClient();
 
@@ -187,15 +188,15 @@ export default function NotesTab({ currentUser }: NotesTabProps) {
 
     // Handle confirmed delete note
     const handleConfirmDelete = async () => {
-        if (!noteToDelete) return;
+        if (!noteToDelete || isDeleting) return;
 
+        setIsDeleting(true);
         try {
-            // Optimistically remove note from UI immediately
-            const noteToRemove = noteToDelete;
-            setNotes(prev => prev.filter(note => note.note_id !== noteToRemove.note_id));
+            // Delete from database first (no optimistic update)
+            await deleteNote(supabase, noteToDelete.note_id, currentUser.user_id);
 
-            // Delete from database
-            await deleteNote(supabase, noteToRemove.note_id, currentUser.user_id);
+            // Remove from UI only after successful deletion
+            setNotes(prev => prev.filter(note => note.note_id !== noteToDelete.note_id));
 
             toast({
                 title: "Thành công",
@@ -203,12 +204,6 @@ export default function NotesTab({ currentUser }: NotesTabProps) {
             });
         } catch (error) {
             console.error("Error deleting note:", error);
-
-            // Restore note on error (rollback optimistic update)
-            if (noteToDelete) {
-                setNotes(prev => [noteToDelete, ...prev]);
-            }
-
             toast({
                 title: "Lỗi",
                 description: "Không thể xóa ghi chú. Vui lòng thử lại.",
@@ -216,6 +211,7 @@ export default function NotesTab({ currentUser }: NotesTabProps) {
             });
         } finally {
             // Always clean up state
+            setIsDeleting(false);
             setIsDeleteDialogOpen(false);
             setNoteToDelete(null);
         }
@@ -223,6 +219,7 @@ export default function NotesTab({ currentUser }: NotesTabProps) {
 
     // Handle cancel delete
     const handleCancelDelete = () => {
+        if (isDeleting) return; // Prevent canceling during deletion
         setIsDeleteDialogOpen(false);
         setNoteToDelete(null);
     };
@@ -329,6 +326,7 @@ export default function NotesTab({ currentUser }: NotesTabProps) {
                 onClose={handleCancelDelete}
                 onConfirm={handleConfirmDelete}
                 noteTitle={noteToDelete?.title || ""}
+                isDeleting={isDeleting}
             />
         </div>
     );

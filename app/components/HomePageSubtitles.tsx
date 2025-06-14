@@ -13,7 +13,7 @@ const HomePageSubtitles: React.FC<HomePageSubtitlesProps> = ({
         if (user.user_info.user_type === "doctor") {
             return (
                 <p className="text-lg text-muted-foreground">
-                    {"Sử dụng các chế độ hỗ trợ chuyên nghiệp để hỗ trợ bệnh nhân khiếm thị"}
+                    {"Sử dụng các chế độ hỗ trợ chuyên nghiệp để hỗ trợ"}
                 </p>
             );
         } else {

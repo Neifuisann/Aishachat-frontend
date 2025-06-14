@@ -11,12 +11,14 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Loader2 } from "lucide-react";
 
 interface DeleteConfirmDialogProps {
     isOpen: boolean;
     onClose: () => void;
     onConfirm: () => void;
     noteTitle: string;
+    isDeleting?: boolean;
 }
 
 export default function DeleteConfirmDialog({
@@ -24,19 +26,21 @@ export default function DeleteConfirmDialog({
     onClose,
     onConfirm,
     noteTitle,
+    isDeleting = false,
 }: DeleteConfirmDialogProps) {
     const handleConfirm = () => {
         onConfirm();
-        // Ensure dialog closes properly
-        onClose();
+        // Don't call onClose() here - the parent component handles dialog state cleanup
     };
 
     const handleCancel = () => {
-        onClose();
+        if (!isDeleting) {
+            onClose();
+        }
     };
 
     const handleOpenChange = (open: boolean) => {
-        if (!open) {
+        if (!open && !isDeleting) {
             onClose();
         }
     };
@@ -52,14 +56,22 @@ export default function DeleteConfirmDialog({
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel onClick={handleCancel}>
+                    <AlertDialogCancel onClick={handleCancel} disabled={isDeleting}>
                         Hủy
                     </AlertDialogCancel>
                     <AlertDialogAction
                         onClick={handleConfirm}
-                        className="bg-red-600 hover:bg-red-700 focus:ring-red-600"
+                        disabled={isDeleting}
+                        className="bg-red-600 hover:bg-red-700 focus:ring-red-600 disabled:opacity-50"
                     >
-                        Xóa
+                        {isDeleting ? (
+                            <>
+                                <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                                Đang xóa...
+                            </>
+                        ) : (
+                            "Xóa"
+                        )}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

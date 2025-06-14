@@ -20,7 +20,7 @@ export default async function LandingPage() {
                 </h1>
 
                 <p className="text-xl md:text-2xl text-muted-foreground text-center max-w-[700px] leading-relaxed">
-                  <span className="font-silkscreen mx-1 text-primary font-bold">Aisha</span> cung cấp các công cụ hỗ trợ thị giác AI chuyên nghiệp cho người khiếm thị và những người cần hỗ trợ thị giác.
+                  <span className="font-silkscreen mx-1 text-primary font-bold">Aisha</span> cung cấp các công cụ hỗ trợ thị giác AI chuyên nghiệp.
                 </p>
 
                 <div className="flex flex-col gap-6 pt-6">
@@ -126,7 +126,7 @@ export default async function LandingPage() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">
                 Tính năng hỗ trợ thị giác toàn diện
               </h2>
-              <p className="text-lg text-muted-foreground mt-2">Các công cụ AI chuyên nghiệp được thiết kế cho người khiếm thị</p>
+              <p className="text-lg text-muted-foreground mt-2">Các công cụ AI chuyên nghiệp được thiết kế cho cộng đồng</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

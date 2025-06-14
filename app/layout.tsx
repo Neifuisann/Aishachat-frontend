@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     },
     applicationName: "Aisha AI",
     description:
-        "Aisha là nền tảng hỗ trợ thị giác AI chuyên nghiệp, cung cấp các công cụ hỗ trợ thời gian thực cho người khiếm thị và những người cần hỗ trợ thị giác.",
+        "Aisha là nền tảng hỗ trợ thị giác AI chuyên nghiệp, cung cấp các công cụ hỗ trợ thời gian thực.",
     authors: [
         {
             name: "Aisha Team",
@@ -123,14 +123,14 @@ export const metadata: Metadata = {
     ],
     keywords: [
         "hỗ trợ thị giác",
-        "AI khiếm thị",
+        "AI thị giác",
         "công nghệ hỗ trợ",
         "thiết bị hỗ trợ thị giác",
         "AI accessibility",
         "vision assistance",
         "assistive technology",
         "Aisha AI",
-        "hỗ trợ người khiếm thị",
+        "hỗ trợ người",
         "công nghệ tiếp cận",
         "AI hỗ trợ",
         "thị giác AI",
@@ -142,7 +142,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Aisha AI: Nền tảng hỗ trợ thị giác AI thời gian thực",
         description:
-            "Aisha cung cấp nền tảng hỗ trợ thị giác AI chuyên nghiệp với các công cụ hỗ trợ thời gian thực cho người khiếm thị và những người cần hỗ trợ thị giác.",
+            "Aisha cung cấp nền tảng hỗ trợ thị giác AI chuyên nghiệp với các công cụ hỗ trợ thời gian thực.",
         siteName: "Aisha AI",
         locale: "vi-VN",
         type: "website",

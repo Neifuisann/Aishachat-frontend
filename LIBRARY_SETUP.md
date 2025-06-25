@@ -63,7 +63,7 @@ FOR SELECT USING (
 CREATE POLICY "Admin can upload to public folder" ON storage.objects
 FOR INSERT WITH CHECK (
     bucket_id = 'books' 
-    AND auth.email() = 'admin@elatoai.com' 
+    AND auth.email() = 'admin@Aishaai.com' 
     AND (storage.foldername(name))[1] = 'public'
 );
 ```
@@ -110,7 +110,7 @@ Once the database is set up, update the code to use the proper bucket:
 - Search within books
 - Sort and filter personal collection
 
-### For Admin (admin@elatoai.com):
+### For Admin (admin@Aishaai.com):
 - Upload books to public library
 - All regular user features
 - Manage public book collection
@@ -157,7 +157,7 @@ books/
 
 ## 🚨 Important Notes
 
-1. **Admin Account**: Only `admin@elatoai.com` can upload to public library
+1. **Admin Account**: Only `admin@Aishaai.com` can upload to public library
 2. **File Types**: Supports .txt, .pdf, .doc, .docx files
 3. **Security**: All files are private by default with proper RLS policies
 4. **Performance**: Includes proper indexing for fast queries

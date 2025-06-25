@@ -103,7 +103,7 @@ CREATE INDEX IF NOT EXISTS idx_reading_history_last_read ON public.reading_histo
 
 -- Allow admin to upload to public folder
 -- CREATE POLICY "Admin can upload to public folder" ON storage.objects
---     FOR INSERT WITH CHECK (bucket_id = 'books' AND auth.email() = 'admin@elatoai.com' AND (storage.foldername(name))[1] = 'public');
+--     FOR INSERT WITH CHECK (bucket_id = 'books' AND auth.email() = 'admin@Aishaai.com' AND (storage.foldername(name))[1] = 'public');
 
 -- 8. Grant necessary permissions
 GRANT ALL ON public.books TO authenticated;

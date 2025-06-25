@@ -31,7 +31,7 @@ export default function LibraryTab({ currentUser }: LibraryTabProps) {
     const [activeTab, setActiveTab] = useState("public");
 
     const supabase = createClient();
-    const isAdmin = currentUser.email === "admin@elatoai.com";
+    const isAdmin = currentUser.email === "admin@Aishaai.com";
 
     // Load books and reading history
     const loadData = useCallback(async () => {
